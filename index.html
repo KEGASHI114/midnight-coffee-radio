@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midnight Coffee Radio ☕ | 24/7 AI Lo-Fi Station & Free Download</title>
+  <link rel="icon" type="image/png" href="assets/pixel_cat.png">
+  
+  <!-- Pixel Fonts from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas 动态背景粒子引擎 (像素雨丝与环境氛围) -->
+  <canvas id="pixelRainCanvas"></canvas>
+
+  <div class="site-wrapper">
+    <!-- 顶部状态导航栏 -->
+    <header class="pixel-header">
+      <div class="header-left">
+        <div class="avatar-container">
+          <img src="assets/pixel_cat.png" alt="Midnight Coffee Cat" class="cat-avatar" id="catAvatar">
+          <div class="cat-bubble" id="catBubble">Purr... Enjoy the coffee! 🐾</div>
+        </div>
+        <div class="brand-titles">
+          <h1 class="brand-name">MIDNIGHT COFFEE RADIO</h1>
+          <p class="brand-tagline">☕ 24/7 Chill Lo-Fi Music Station • 100% Free For Creators</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <a href="https://www.youtube.com/channel/UCFjfUNEtwx_98dDEOpYoqjQ" target="_blank" class="pixel-btn live-btn">
+          <span class="live-dot"></span> LIVE ON YOUTUBE
+        </a>
+      </div>
+    </header>
+
+    <!-- 核心像素音频播放器 -->
+    <section class="player-section pixel-box">
+      <div class="player-top">
+        <div class="now-playing-info">
+          <span class="badge" id="playerCategoryBadge">[01 Rainy Window]</span>
+          <h2 class="current-track-title" id="playerTrackTitle">Select a track to play...</h2>
+          <span class="current-track-artist" id="playerArtist">Midnight Coffee Radio • Google Lyria 3.5</span>
+        </div>
+        <!-- 像素音频频谱动效画布 -->
+        <div class="visualizer-container">
+          <canvas id="visualizerCanvas" width="220" height="48"></canvas>
+        </div>
+      </div>
+
+      <!-- 进度条与时间 -->
+      <div class="progress-container">
+        <span class="time-label" id="currentTimeLabel">00:00</span>
+        <div class="pixel-slider-track" id="progressTrack">
+          <div class="pixel-slider-fill" id="progressFill"></div>
+          <div class="pixel-slider-thumb" id="progressThumb"></div>
+        </div>
+        <span class="time-label" id="totalTimeLabel">00:00</span>
+      </div>
+
+      <!-- 播放器控制按钮组 -->
+      <div class="player-controls">
+        <div class="controls-left">
+          <button class="pixel-btn control-btn" id="prevBtn" title="Previous Track">⏮ PREV</button>
+          <button class="pixel-btn control-btn play-main-btn" id="playBtn" title="Play / Pause">▶ PLAY</button>
+          <button class="pixel-btn control-btn" id="nextBtn" title="Next Track">NEXT ⏭</button>
+          <button class="pixel-btn control-btn" id="shuffleBtn" title="Toggle Shuffle">🔀 SHUFFLE</button>
+        </div>
+        <div class="controls-right">
+          <button class="pixel-btn like-main-btn" id="currentLikeBtn">♥ LIKE (<span id="currentLikeCount">0</span>)</button>
+          <a href="#" class="pixel-btn download-main-btn" id="currentDownloadBtn" download>⬇ DOWNLOAD MP3</a>
+          <div class="volume-container">
+            <span class="vol-icon">🔊</span>
+            <input type="range" min="0" max="1" step="0.05" value="0.8" class="pixel-volume-slider" id="volumeSlider">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主布局网格 (左侧歌单，右侧排行榜与下载) -->
+    <main class="main-grid">
+      <!-- 左侧：10 大分类与全量 101 首曲目 -->
+      <section class="tracklist-container pixel-box">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h3 class="section-title">📂 VIBE VAULT (101 TRACKS)</h3>
+            <span class="section-subtitle">Click to stream • 100% Free CC0 / Commercial Safe</span>
+          </div>
+          <!-- 搜索过滤 -->
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="pixel-input" placeholder="Search track name...">
+          </div>
+        </div>
+
+        <!-- 10 大分类筛选标签页 -->
+        <div class="category-tabs" id="categoryTabs">
+          <button class="cat-tab-btn active" data-cat="all">ALL (101)</button>
+          <button class="cat-tab-btn" data-cat="01">01. Rain Piano</button>
+          <button class="cat-tab-btn" data-cat="02">02. Tokyo Code</button>
+          <button class="cat-tab-btn" data-cat="03">03. Coffee Jazz</button>
+          <button class="cat-tab-btn" data-cat="04">04. Vintage Tape</button>
+          <button class="cat-tab-btn" data-cat="05">05. Sunday Guitar</button>
+          <button class="cat-tab-btn" data-cat="06">06. Autumn Sax</button>
+          <button class="cat-tab-btn" data-cat="07">07. Deep Focus</button>
+          <button class="cat-tab-btn" data-cat="08">08. Cozy Hearth</button>
+          <button class="cat-tab-btn" data-cat="09">09. Night Neon</button>
+          <button class="cat-tab-btn" data-cat="10">10. Starry Sleep</button>
+        </div>
+
+        <!-- 歌曲列表 -->
+        <div class="tracks-list" id="tracksList">
+          <!-- 由 app.js 动态渲染 -->
+        </div>
+      </section>
+
+      <!-- 右侧边栏：每周十佳名人堂与版权说明 -->
+      <aside class="sidebar-container">
+        <!-- 每周十佳名人堂榜单 (置顶) -->
+        <div class="sidebar-card pixel-box fame-card">
+          <div class="fame-header">
+            <h4>🏆 WEEKLY TOP 10</h4>
+            <span class="fame-sub">Hall of Fame • Most Loved</span>
+          </div>
+          <div class="fame-list" id="fameList">
+            <!-- 由 app.js 动态渲染 -->
+          </div>
+        </div>
+
+        <!-- 创作者商用版权许可说明卡片 -->
+        <div class="sidebar-card pixel-box license-card">
+          <h4>📜 CREATOR LICENSE</h4>
+          <p>Every track is generated with Google DeepMind Lyria 3.5. <strong>100% Royalty Free & Safe</strong> for YouTube videos, Twitch streams, podcasts, and indie games.</p>
+          <div class="license-tags">
+            <span class="pill-tag">✓ No Copyright Strikes</span>
+            <span class="pill-tag">✓ Commercial Monetizable</span>
+            <span class="pill-tag">✓ SynthID Cleared</span>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- 底部页脚 -->
+    <footer class="pixel-footer">
+      <p>© 2026 Midnight Coffee Radio • Powered by Google AI Pro & Lyria 3.5 • Broadcast from Seoul KT Hub</p>
+      <p class="footer-links">
+        <a href="https://www.youtube.com/channel/UCFjfUNEtwx_98dDEOpYoqjQ" target="_blank">YouTube Live Stream</a> • 
+        <a href="#catAvatar">Back to Top ☕</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- 原生 HTML5 音频引擎 (隐藏) -->
+  <audio id="audioEngine" preload="metadata"></audio>
+
+  <!-- 引入全量曲库数据 (支持 file:/// 本地双击零跨域直接播放) -->
+  <script src="data/tracks.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

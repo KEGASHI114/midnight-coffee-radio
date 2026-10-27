@@ -1,0 +1,696 @@
+/* ==============================================================================
+   Midnight Coffee Radio ☕ - Cute 16-Bit Pixel Art Theme
+   ============================================================================== */
+
+:root {
+  --bg-color: #161322;
+  --card-bg: #241d33;
+  --card-border: #3b2f54;
+  --text-main: #f8f8f2;
+  --text-muted: #a69bb8;
+  
+  --accent-amber: #ffb86c;
+  --accent-gold: #f1fa8c;
+  --accent-green: #50fa7b;
+  --accent-cyan: #8be9fd;
+  --accent-pink: #ff79c6;
+  --accent-red: #ff5555;
+  
+  --pixel-shadow: 4px 4px 0px #0b0912;
+  --pixel-shadow-sm: 2px 2px 0px #0b0912;
+  --pixel-border: 3px solid #0b0912;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  image-rendering: pixelated;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Silkscreen', 'VT323', -apple-system, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* 全屏像素雨丝 Canvas 动效层 */
+#pixelRainCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+}
+
+.site-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* 像素通用按钮与卡片 */
+.pixel-box {
+  background: var(--card-bg);
+  border: var(--pixel-border);
+  box-shadow: var(--pixel-shadow);
+  border-radius: 4px;
+}
+
+.pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #382d50;
+  color: var(--text-main);
+  border: 2px solid #0b0912;
+  box-shadow: var(--pixel-shadow-sm);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  transition: transform 0.05s ease, background-color 0.1s ease;
+}
+
+.pixel-btn:hover {
+  background: #4a3b6a;
+  color: var(--accent-gold);
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px #000;
+}
+
+/* 顶部 Header */
+.pixel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 12px 0;
+  border-bottom: 2px dashed var(--card-border);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.cat-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-amber);
+  box-shadow: var(--pixel-shadow-sm);
+  display: block;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatar-container:hover .cat-avatar {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.cat-bubble {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-gold);
+  color: #1a1528;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 6px 10px;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0px #000;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.avatar-container:hover .cat-bubble {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+.brand-titles .brand-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+  color: var(--accent-amber);
+  text-shadow: 2px 2px 0px #000;
+  letter-spacing: 0.5px;
+}
+
+.brand-titles .brand-tagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.live-btn {
+  background: #ff5555;
+  color: #fff;
+  border-color: #000;
+  font-size: 10px;
+  gap: 8px;
+}
+
+.live-btn:hover {
+  background: #ff6e6e;
+  color: #fff;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: livePulse 1.2s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* 核心播放器区域 */
+.player-section {
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  background: linear-gradient(180deg, #2a223c 0%, #1f192d 100%);
+  border-color: #4b3a69;
+}
+
+.player-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.badge {
+  display: inline-block;
+  background: #13101c;
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
+  font-size: 11px;
+  padding: 2px 8px;
+  margin-bottom: 6px;
+}
+
+.current-track-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 15px;
+  color: var(--accent-gold);
+  text-shadow: 2px 2px 0px #000;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 600px;
+}
+
+.current-track-artist {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.visualizer-container {
+  background: #130f1b;
+  border: 2px solid #000;
+  padding: 4px;
+  box-shadow: inset 1px 1px 0px #000;
+}
+
+#visualizerCanvas {
+  display: block;
+}
+
+/* 进度条与控制 */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.time-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  min-width: 45px;
+}
+
+.pixel-slider-track {
+  flex: 1;
+  height: 12px;
+  background: #110e19;
+  border: 2px solid #0b0912;
+  position: relative;
+  cursor: pointer;
+}
+
+.pixel-slider-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ffb86c, #f1fa8c);
+  pointer-events: none;
+}
+
+.pixel-slider-thumb {
+  position: absolute;
+  top: -4px;
+  left: 0%;
+  width: 10px;
+  height: 16px;
+  background: #fff;
+  border: 2px solid #000;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.controls-left, .controls-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.play-main-btn {
+  background: var(--accent-amber);
+  color: #1a1528;
+  font-size: 12px;
+  padding: 10px 18px;
+}
+
+.play-main-btn:hover {
+  background: var(--accent-gold);
+  color: #1a1528;
+}
+
+.like-main-btn {
+  background: #472d42;
+  color: var(--accent-pink);
+}
+
+.like-main-btn:hover {
+  background: var(--accent-pink);
+  color: #1a1528;
+}
+
+.download-main-btn {
+  background: #254435;
+  color: var(--accent-green);
+}
+
+.download-main-btn:hover {
+  background: var(--accent-green);
+  color: #1a1528;
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #171322;
+  padding: 6px 10px;
+  border: 2px solid #000;
+}
+
+.pixel-volume-slider {
+  width: 80px;
+  accent-color: var(--accent-amber);
+  cursor: pointer;
+}
+
+/* 主布局网格 (左侧歌单，右侧名人堂) */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* 歌单区域 */
+.tracklist-container {
+  padding: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.section-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--accent-amber);
+}
+
+.section-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #14101e;
+  border: 2px solid #000;
+  padding: 4px 8px;
+}
+
+.pixel-input {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-family: 'Silkscreen', monospace;
+  font-size: 13px;
+  outline: none;
+  width: 180px;
+}
+
+/* 分类标签 Tabs */
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px dashed #3a2e52;
+}
+
+.cat-tab-btn {
+  background: #1f182c;
+  color: var(--text-muted);
+  border: 2px solid #000;
+  font-family: 'Silkscreen', monospace;
+  font-size: 11px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.cat-tab-btn:hover {
+  background: #332749;
+  color: var(--text-main);
+}
+
+.cat-tab-btn.active {
+  background: var(--accent-amber);
+  color: #14101e;
+  border-color: #000;
+  font-weight: bold;
+}
+
+/* 歌曲列表项 */
+.tracks-list {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.track-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #1d1729;
+  border: 2px solid transparent;
+  border-bottom: 1px solid #2b223c;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.track-item:hover {
+  background: #2b213e;
+  border-color: #4b396e;
+}
+
+.track-item.playing {
+  background: #36294e;
+  border-color: var(--accent-amber);
+}
+
+.track-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.track-num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--accent-amber);
+  min-width: 28px;
+}
+
+.track-info-wrap {
+  overflow: hidden;
+}
+
+.track-name-text {
+  font-size: 14px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-cat-pill {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.track-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track-duration-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-right: 6px;
+}
+
+.action-btn {
+  padding: 4px 8px;
+  font-size: 9px;
+}
+
+/* 侧边栏与名人堂 */
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-card {
+  padding: 18px;
+}
+
+.bulk-download-card {
+  text-align: center;
+  background: linear-gradient(180deg, #2c2140 0%, #1e172d 100%);
+  border-color: var(--accent-green);
+}
+
+.bulk-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.bulk-download-card h4 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--accent-green);
+  margin-bottom: 6px;
+}
+
+.bulk-download-card p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.bulk-btn {
+  background: var(--accent-green);
+  color: #14101e;
+  width: 100%;
+  padding: 10px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.pack-size-tag {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.fame-header h4 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: var(--accent-gold);
+}
+
+.fame-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.fame-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #1a1426;
+  border-bottom: 1px solid #281e3a;
+  margin-bottom: 4px;
+}
+
+.fame-rank {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  margin-right: 8px;
+}
+
+.fame-rank-1 { color: #ffd700; }
+.fame-rank-2 { color: #c0c0c0; }
+.fame-rank-3 { color: #cd7f32; }
+
+.fame-title {
+  font-size: 13px;
+  color: #fff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fame-votes {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--accent-pink);
+}
+
+.license-card h4 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+}
+
+.license-card p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.license-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pill-tag {
+  background: #140f1d;
+  color: var(--accent-cyan);
+  border: 1px solid #332749;
+  font-size: 11px;
+  padding: 3px 6px;
+}
+
+/* 页脚 */
+.pixel-footer {
+  text-align: center;
+  margin-top: 36px;
+  padding: 20px 0;
+  border-top: 2px dashed #2d2442;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  margin-top: 6px;
+}
+
+.footer-links a {
+  color: var(--accent-amber);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* 自定义像素滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #120e1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #3c2f56;
+  border: 1px solid #000;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-amber);
+}
+
+/* 响应式适配 */
+@media (max-width: 860px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .player-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .visualizer-container {
+    width: 100%;
+  }
+  #visualizerCanvas {
+    width: 100%;
+  }
+}
