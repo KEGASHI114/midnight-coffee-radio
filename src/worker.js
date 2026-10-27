@@ -10,14 +10,24 @@ async function hashVisitor(ip, userAgent) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 32);
 }
 
+function sanitizeText(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const jsonResponse = (data, status = 200, extraHeaders = {}) => {
   return new Response(JSON.stringify(data), {
     status,
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       ...extraHeaders
     }
   });
@@ -53,7 +63,6 @@ export default {
           };
         }
 
-        // 边缘缓存 5 秒，浏览器缓存 5 秒，抵抗高并发
         return jsonResponse({ success: true, stats }, 200, {
           'Cache-Control': 'public, max-age=5, s-maxage=5'
         });
@@ -84,13 +93,11 @@ export default {
         const visitorHash = await hashVisitor(ip, ua);
 
         if (action === 'like') {
-          // 检查此访客是否已点赞过该曲目 (防重复刷票)
           const existing = await env.DB.prepare(
             'SELECT id FROM vote_logs WHERE track_id = ? AND visitor_hash = ? LIMIT 1'
           ).bind(trackId, visitorHash).first();
 
           if (!existing) {
-            // 写入日志并原子累加
             await env.DB.batch([
               env.DB.prepare(
                 'INSERT INTO vote_logs (track_id, visitor_hash, action) VALUES (?, ?, "like")'
@@ -101,7 +108,6 @@ export default {
             ]);
           }
         } else {
-          // 取消点赞
           await env.DB.batch([
             env.DB.prepare(
               'DELETE FROM vote_logs WHERE track_id = ? AND visitor_hash = ?'
@@ -112,7 +118,6 @@ export default {
           ]);
         }
 
-        // 查询最新票数返回
         const updated = await env.DB.prepare(
           'SELECT likes_count FROM track_stats WHERE track_id = ?'
         ).bind(trackId).first();
@@ -141,14 +146,148 @@ export default {
             ).bind(trackId).run();
           }
         } catch (e) {
-          // 静默记录
+          // 静默忽略
         }
       }
       return jsonResponse({ success: true });
     }
 
     // --------------------------------------------------------------------------
-    // 4. 静态资源托管兜底 (交由 Cloudflare Workers Assets 引擎)
+    // 4. API 路由: GET /api/messages (拉取留言板最新 30 条留言)
+    // --------------------------------------------------------------------------
+    if (url.pathname === '/api/messages' && request.method === 'GET') {
+      if (!env.DB) {
+        return jsonResponse({ success: false, messages: [] }, 200);
+      }
+
+      try {
+        const { results } = await env.DB.prepare(
+          'SELECT id, nickname, avatar_emoji, content, created_at FROM guestbook_messages WHERE status = "approved" ORDER BY id DESC LIMIT 30'
+        ).all();
+
+        return jsonResponse({ success: true, messages: results || [] }, 200, {
+          'Cache-Control': 'public, max-age=3, s-maxage=3'
+        });
+      } catch (err) {
+        return jsonResponse({ success: false, error: err.message, messages: [] }, 500);
+      }
+    }
+
+    // --------------------------------------------------------------------------
+    // 5. API 路由: POST /api/message (发布新留言，含链接拦截 + 30s 冷却)
+    // --------------------------------------------------------------------------
+    if (url.pathname === '/api/message' && request.method === 'POST') {
+      if (!env.DB) {
+        return jsonResponse({ success: false, error: 'Database not available' }, 200);
+      }
+
+      try {
+        const body = await request.json().catch(() => ({}));
+        let content = (body.content || '').trim();
+        let nickname = (body.nickname || '').trim() || 'Anon';
+        let avatarEmoji = (body.avatarEmoji || '').trim() || '☕';
+
+        // 基础参数校验
+        if (!content) {
+          return jsonResponse({ success: false, error: 'ERR_EMPTY' }, 400);
+        }
+
+        // 截断超长字符串
+        if (content.length > 100) {
+          content = content.slice(0, 100);
+        }
+        if (nickname.length > 16) {
+          nickname = nickname.slice(0, 16);
+        }
+
+        // 头像 Emoji 白名单
+        const validAvatars = ['☕', '🐱', '🎧', '🌧️', '🌙', '✨'];
+        if (!validAvatars.includes(avatarEmoji)) {
+          avatarEmoji = '☕';
+        }
+
+        // 1. 严格广告与外部链接拦截
+        const linkRegex = /(https?:\/\/|www\.|t\.me\/|t\.cn\/|bit\.ly\/|[a-zA-Z0-9-]+\.(com|net|org|xyz|io|co|me|vip|top|cc|ru|cn)(\/|\s|$))/i;
+        if (linkRegex.test(content) || linkRegex.test(nickname)) {
+          return jsonResponse({ success: false, error: 'ERR_NO_LINKS' }, 400);
+        }
+
+        const ip = request.headers.get('cf-connecting-ip') || '127.0.0.1';
+        const ua = request.headers.get('user-agent') || 'generic';
+        const visitorHash = await hashVisitor(ip, ua);
+
+        // 2. 30 秒 IP 发言冷却风控
+        const lastMsg = await env.DB.prepare(
+          "SELECT (strftime('%s', 'now') - strftime('%s', created_at)) as diff_sec FROM guestbook_messages WHERE visitor_hash = ? ORDER BY id DESC LIMIT 1"
+        ).bind(visitorHash).first();
+
+        if (lastMsg && typeof lastMsg.diff_sec === 'number' && lastMsg.diff_sec < 30) {
+          const remaining = Math.max(1, 30 - Math.floor(lastMsg.diff_sec));
+          return jsonResponse({ success: false, error: 'ERR_RATE_LIMIT', remaining }, 429);
+        }
+
+        // 3. XSS 安全字符转义入库
+        const safeContent = sanitizeText(content);
+        const safeNickname = sanitizeText(nickname);
+
+        const insertRes = await env.DB.prepare(
+          'INSERT INTO guestbook_messages (nickname, avatar_emoji, content, visitor_hash, status) VALUES (?, ?, ?, ?, "approved")'
+        ).bind(safeNickname, avatarEmoji, safeContent, visitorHash).run();
+
+        const newId = insertRes.meta?.last_row_id;
+
+        return jsonResponse({
+          success: true,
+          message: {
+            id: newId,
+            nickname: safeNickname,
+            avatar_emoji: avatarEmoji,
+            content: safeContent,
+            created_at: new Date().toISOString()
+          }
+        });
+      } catch (err) {
+        return jsonResponse({ success: false, error: err.message }, 500);
+      }
+    }
+
+    // --------------------------------------------------------------------------
+    // 6. API 路由: DELETE /api/message (管理员删除留言)
+    // --------------------------------------------------------------------------
+    if (url.pathname === '/api/message' && request.method === 'DELETE') {
+      if (!env.DB) {
+        return jsonResponse({ success: false, error: 'Database not available' }, 200);
+      }
+
+      // 管理员鉴权校验
+      const authHeader = request.headers.get('Authorization') || '';
+      const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+      const adminSecret = env.ADMIN_SECRET || 'mcr_coffee_admin_2026';
+
+      if (!token || token !== adminSecret) {
+        return jsonResponse({ success: false, error: 'UNAUTHORIZED' }, 401);
+      }
+
+      try {
+        const body = await request.json().catch(() => ({}));
+        const messageId = parseInt(body.id || url.searchParams.get('id'), 10);
+
+        if (!messageId) {
+          return jsonResponse({ success: false, error: 'Missing message ID' }, 400);
+        }
+
+        await env.DB.prepare(
+          'DELETE FROM guestbook_messages WHERE id = ?'
+        ).bind(messageId).run();
+
+        return jsonResponse({ success: true, id: messageId });
+      } catch (err) {
+        return jsonResponse({ success: false, error: err.message }, 500);
+      }
+    }
+
+    // --------------------------------------------------------------------------
+    // 7. 静态资源托管兜底 (交由 Cloudflare Workers Assets 引擎)
     // --------------------------------------------------------------------------
     if (env.ASSETS) {
       return env.ASSETS.fetch(request);

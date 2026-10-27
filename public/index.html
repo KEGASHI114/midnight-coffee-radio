@@ -148,7 +148,7 @@
         </div>
       </section>
 
-      <!-- 右侧边栏：每周十佳名人堂 -->
+      <!-- 右侧边栏：每周十佳名人堂与午夜留言板 -->
       <aside class="sidebar-container">
         <!-- 每周十佳名人堂榜单 (置顶) -->
         <div class="sidebar-card pixel-box fame-card">
@@ -159,6 +159,52 @@
           <div class="fame-list" id="fameList">
             <!-- 由 app.js 动态渲染 -->
           </div>
+        </div>
+
+        <!-- 💬 午夜像素留言板卡片 -->
+        <div class="sidebar-card pixel-box guestbook-card">
+          <div class="guestbook-header" id="guestbookHeader" title="Double click to toggle Admin Mode">
+            <div class="guestbook-title-wrap">
+              <h4 id="guestbookTitle">💬 COZY GUESTBOOK</h4>
+              <span class="guestbook-sub" id="guestbookSub">Leave a warm thought for fellow night owls</span>
+            </div>
+            <div class="admin-badge" id="adminBadge" style="display: none;" title="Admin Mode Active">🛡️ ADMIN</div>
+          </div>
+
+          <!-- 留言滚动列表 -->
+          <div class="guestbook-list" id="guestbookList">
+            <div class="guestbook-loading">Loading notes... ☕</div>
+          </div>
+
+          <!-- 留言发布表单 -->
+          <form class="guestbook-form" id="guestbookForm">
+            <!-- 头像选择与昵称输入 -->
+            <div class="form-row-top">
+              <div class="avatar-picker" id="avatarPicker">
+                <button type="button" class="avatar-opt active" data-emoji="☕">☕</button>
+                <button type="button" class="avatar-opt" data-emoji="🐱">🐱</button>
+                <button type="button" class="avatar-opt" data-emoji="🎧">🎧</button>
+                <button type="button" class="avatar-opt" data-emoji="🌧️">🌧️</button>
+                <button type="button" class="avatar-opt" data-emoji="🌙">🌙</button>
+                <button type="button" class="avatar-opt" data-emoji="✨">✨</button>
+              </div>
+              <input type="text" id="guestNickname" class="pixel-input nick-input" placeholder="Your nickname..." maxlength="16" required>
+            </div>
+
+            <!-- 留言内容与字数 -->
+            <div class="form-row-middle">
+              <textarea id="guestContent" class="pixel-input content-input" placeholder="Leave a cozy thought... (max 100)" maxlength="100" rows="2" required></textarea>
+              <span class="char-counter" id="charCounter">0/100</span>
+            </div>
+
+            <!-- 错误与提示横幅 -->
+            <div class="form-alert" id="formAlert" style="display: none;"></div>
+
+            <!-- 提交按钮 -->
+            <button type="submit" class="pixel-btn send-msg-btn" id="sendMsgBtn">
+              <span id="sendBtnText">✉ POST NOTE</span>
+            </button>
+          </form>
         </div>
       </aside>
     </main>

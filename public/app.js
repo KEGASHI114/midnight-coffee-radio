@@ -143,6 +143,240 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ==============================================================================
+  // 4.5. 💬 午夜留言板 (Cozy Guestbook) 状态、函数与事件交互
+  // ==============================================================================
+  let guestbookMessages = [];
+  let selectedAvatar = localStorage.getItem('mcr_avatar') || '☕';
+  let adminSecret = sessionStorage.getItem('mcr_admin_secret') || '';
+
+  const guestbookList = document.getElementById('guestbookList');
+  const guestbookForm = document.getElementById('guestbookForm');
+  const guestNickname = document.getElementById('guestNickname');
+  const guestContent = document.getElementById('guestContent');
+  const charCounter = document.getElementById('charCounter');
+  const sendMsgBtn = document.getElementById('sendMsgBtn');
+  const formAlert = document.getElementById('formAlert');
+  const avatarPicker = document.getElementById('avatarPicker');
+  const guestbookHeader = document.getElementById('guestbookHeader');
+  const adminBadge = document.getElementById('adminBadge');
+
+  // 恢复保存的昵称和头像
+  if (guestNickname) {
+    guestNickname.value = localStorage.getItem('mcr_nickname') || '';
+  }
+  if (avatarPicker) {
+    avatarPicker.querySelectorAll('.avatar-opt').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-emoji') === selectedAvatar);
+      btn.addEventListener('click', () => {
+        selectedAvatar = btn.getAttribute('data-emoji');
+        localStorage.setItem('mcr_avatar', selectedAvatar);
+        avatarPicker.querySelectorAll('.avatar-opt').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  }
+
+  // 检查 URL 是否带有管理员暗号 (?admin=SECRET)
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('admin')) {
+    adminSecret = urlParams.get('admin');
+    sessionStorage.setItem('mcr_admin_secret', adminSecret);
+    const cleanUrl = window.location.pathname;
+    window.history.replaceState({}, document.title, cleanUrl);
+  }
+
+  // 双击留言板标题可输入管理员口令开启暗号管理模式
+  if (guestbookHeader) {
+    guestbookHeader.addEventListener('dblclick', () => {
+      const dict = getI18nDict();
+      const input = prompt(dict.adminPromptTitle || 'Enter Admin Secret:');
+      if (input !== null) {
+        adminSecret = input.trim();
+        sessionStorage.setItem('mcr_admin_secret', adminSecret);
+        alert(dict.adminActivated || 'Admin Mode Activated! 🛡️');
+        renderGuestbookMessages();
+      }
+    });
+  }
+
+  // 相对时间格式化
+  function formatRelativeTime(dateStr) {
+    const dict = getI18nDict();
+    if (!dateStr) return dict.timeJustNow || 'just now';
+    const now = Date.now();
+    const then = new Date(dateStr).getTime();
+    const diffSec = Math.floor((now - then) / 1000);
+    if (diffSec < 60) return dict.timeJustNow || 'just now';
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return (dict.timeMinsAgo || '{m}m ago').replace('{m}', diffMin);
+    const diffHour = Math.floor(diffMin / 60);
+    if (diffHour < 24) return (dict.timeHoursAgo || '{h}h ago').replace('{h}', diffHour);
+    const diffDay = Math.floor(diffHour / 24);
+    return `${diffDay}d ago`;
+  }
+
+  function renderGuestbookMessages() {
+    if (!guestbookList) return;
+    const dict = getI18nDict();
+
+    if (adminBadge) {
+      adminBadge.style.display = adminSecret ? 'inline-block' : 'none';
+    }
+
+    if (guestbookMessages.length === 0) {
+      guestbookList.innerHTML = `
+        <div style="padding: 20px 10px; text-align: center; color: #a69bb8; font-size: 11px; line-height: 1.5;">
+          ${dict.guestbookEmpty || 'No messages yet. Be the first to leave a cozy note! ☕'}
+        </div>
+      `;
+      return;
+    }
+
+    guestbookList.innerHTML = guestbookMessages.map(m => {
+      const timeStr = formatRelativeTime(m.created_at);
+      const delBtn = adminSecret ? `<button type="button" class="msg-del-btn" data-id="${m.id}" title="Delete note">🗑️</button>` : '';
+      return `
+        <div class="guestbook-item" data-id="${m.id}">
+          <span class="msg-avatar">${m.avatar_emoji || '☕'}</span>
+          <div class="msg-body">
+            <div class="msg-top">
+              <span class="msg-nick">${m.nickname || 'Anon'}</span>
+              <div style="display: flex; align-items: center;">
+                <span class="msg-time">${timeStr}</span>
+                ${delBtn}
+              </div>
+            </div>
+            <div class="msg-text">${m.content}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // 绑定管理员一键删除事件
+    if (adminSecret) {
+      guestbookList.querySelectorAll('.msg-del-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const id = parseInt(btn.getAttribute('data-id'), 10);
+          if (!confirm(dict.adminDelConfirm || 'Delete this message?')) return;
+          try {
+            const res = await fetch('/api/message', {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${adminSecret}`
+              },
+              body: JSON.stringify({ id })
+            });
+            const data = await res.json();
+            if (data && data.success) {
+              guestbookMessages = guestbookMessages.filter(item => item.id !== id);
+              renderGuestbookMessages();
+              showAlert(dict.adminDelSuccess || 'Message removed!', true);
+            } else {
+              alert(data.error || 'Delete failed: unauthorized');
+            }
+          } catch (err) {
+            alert('Network error while deleting note');
+          }
+        });
+      });
+    }
+  }
+
+  async function loadMessages() {
+    try {
+      const res = await fetch('/api/messages');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.success && Array.isArray(data.messages)) {
+          guestbookMessages = data.messages;
+          renderGuestbookMessages();
+        }
+      }
+    } catch (e) {
+      console.log('[Guestbook] Load failed:', e);
+    }
+  }
+
+  function showAlert(msg, isSuccess = false) {
+    if (!formAlert) return;
+    formAlert.textContent = msg;
+    formAlert.className = isSuccess ? 'form-alert success' : 'form-alert';
+    formAlert.style.display = 'block';
+    setTimeout(() => {
+      formAlert.style.display = 'none';
+    }, 4500);
+  }
+
+  if (guestContent && charCounter) {
+    guestContent.addEventListener('input', () => {
+      charCounter.textContent = `${guestContent.value.length}/100`;
+    });
+  }
+
+  if (guestbookForm) {
+    guestbookForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const dict = getI18nDict();
+      const content = (guestContent.value || '').trim();
+      const nickname = (guestNickname.value || '').trim() || 'Anon';
+
+      if (!content) {
+        showAlert(dict.errEmpty || 'Please write something first! 🐾');
+        return;
+      }
+
+      // 客户端极速前置链接校验
+      const linkRegex = /(https?:\/\/|www\.|t\.me\/|t\.cn\/|bit\.ly\/|[a-zA-Z0-9-]+\.(com|net|org|xyz|io|co|me|vip|top|cc|ru|cn)(\/|\s|$))/i;
+      if (linkRegex.test(content) || linkRegex.test(nickname)) {
+        showAlert(dict.errNoLinks || 'For a cozy vibe, external links are not allowed ☕');
+        return;
+      }
+
+      sendMsgBtn.disabled = true;
+      const originalText = sendMsgBtn.innerHTML;
+      sendMsgBtn.textContent = dict.guestbookSending || 'Sending...';
+
+      try {
+        const res = await fetch('/api/message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nickname,
+            avatarEmoji: selectedAvatar,
+            content
+          })
+        });
+
+        const data = await res.json();
+        if (data && data.success && data.message) {
+          guestbookMessages.unshift(data.message);
+          renderGuestbookMessages();
+          guestContent.value = '';
+          charCounter.textContent = '0/100';
+          localStorage.setItem('mcr_nickname', nickname);
+          spawnHeartBurst(window.innerWidth - 120, window.innerHeight * 0.7);
+        } else {
+          if (data.error === 'ERR_NO_LINKS') {
+            showAlert(dict.errNoLinks || 'For a cozy vibe, external links are not allowed ☕');
+          } else if (data.error === 'ERR_RATE_LIMIT') {
+            const sec = data.remaining || 30;
+            showAlert((dict.errRateLimit || 'Slow down! Please wait {s}s before sending another note ☕').replace('{s}', sec));
+          } else {
+            showAlert(data.error || 'Failed to post note');
+          }
+        }
+      } catch (err) {
+        showAlert('Network error while posting note');
+      } finally {
+        sendMsgBtn.disabled = false;
+        sendMsgBtn.innerHTML = originalText;
+      }
+    });
+  }
+
   // 多语言国际化 (i18n) 动态文本切换引擎
   function applyLanguage(lang) {
     if (!['en', 'zh', 'ja', 'ko'].includes(lang)) lang = 'en';
@@ -202,20 +436,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const elHallOfFameSub = document.getElementById('hallOfFameSub');
     if (elHallOfFameSub && dict.hallOfFame) elHallOfFameSub.textContent = dict.hallOfFame;
 
-    const elCreatorLicenseTitle = document.getElementById('creatorLicenseTitle');
-    if (elCreatorLicenseTitle && dict.creatorLicense) elCreatorLicenseTitle.textContent = dict.creatorLicense;
+    // 留言板多语言
+    const elGuestbookTitle = document.getElementById('guestbookTitle');
+    if (elGuestbookTitle && dict.guestbookTitle) elGuestbookTitle.textContent = dict.guestbookTitle;
 
-    const elLicenseDesc = document.getElementById('licenseDesc');
-    if (elLicenseDesc && dict.licenseDesc) elLicenseDesc.innerHTML = dict.licenseDesc;
+    const elGuestbookSub = document.getElementById('guestbookSub');
+    if (elGuestbookSub && dict.guestbookSub) elGuestbookSub.textContent = dict.guestbookSub;
 
-    const elPillTag1 = document.getElementById('pillTag1');
-    if (elPillTag1 && dict.pillTag1) elPillTag1.textContent = dict.pillTag1;
+    const elGuestNick = document.getElementById('guestNickname');
+    if (elGuestNick && dict.guestbookNickPlaceholder) elGuestNick.placeholder = dict.guestbookNickPlaceholder;
 
-    const elPillTag2 = document.getElementById('pillTag2');
-    if (elPillTag2 && dict.pillTag2) elPillTag2.textContent = dict.pillTag2;
+    const elGuestContent = document.getElementById('guestContent');
+    if (elGuestContent && dict.guestbookContentPlaceholder) elGuestContent.placeholder = dict.guestbookContentPlaceholder;
 
-    const elPillTag3 = document.getElementById('pillTag3');
-    if (elPillTag3 && dict.pillTag3) elPillTag3.textContent = dict.pillTag3;
+    const elSendBtnText = document.getElementById('sendBtnText');
+    if (elSendBtnText && dict.guestbookSendBtn) elSendBtnText.textContent = dict.guestbookSendBtn;
 
     const elFooterCopyright = document.getElementById('footerCopyright');
     if (elFooterCopyright && dict.footerCopyright) elFooterCopyright.textContent = dict.footerCopyright;
@@ -248,6 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlayBtnState();
     renderTracksList();
     renderHallOfFame();
+    renderGuestbookMessages();
   }
 
   function initTracks(data) {
@@ -262,8 +498,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // 应用当前语言
     applyLanguage(currentLang);
-    // 异步拉取全网 D1 真实云端总账本
+    // 异步拉取全网 D1 真实云端总账本与留言
     loadCloudStats();
+    loadMessages();
   }
 
   if (window.TRACKS_DATA && Array.isArray(window.TRACKS_DATA)) {

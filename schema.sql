@@ -17,6 +17,20 @@ CREATE TABLE IF NOT EXISTS vote_logs (
 
 CREATE INDEX IF NOT EXISTS idx_vote_logs_hash ON vote_logs(visitor_hash, track_id);
 
+-- 3. 午夜留言板表
+CREATE TABLE IF NOT EXISTS guestbook_messages (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    nickname       TEXT NOT NULL DEFAULT 'Anon',
+    avatar_emoji   TEXT NOT NULL DEFAULT '☕',
+    content        TEXT NOT NULL,
+    visitor_hash   TEXT NOT NULL,
+    created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status         TEXT DEFAULT 'approved'
+);
+
+CREATE INDEX IF NOT EXISTS idx_msg_hash ON guestbook_messages(visitor_hash, created_at);
+CREATE INDEX IF NOT EXISTS idx_msg_time ON guestbook_messages(created_at DESC);
+
 -- 初始化 101 首原创曲目底表 (全量 0 票起步)
 INSERT OR IGNORE INTO track_stats (track_id, likes_count, download_count, play_count) VALUES
     (1, 0, 0, 0),
