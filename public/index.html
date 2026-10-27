@@ -27,13 +27,20 @@
           <div class="cat-bubble" id="catBubble">Purr... Enjoy the coffee! 🐾</div>
         </div>
         <div class="brand-titles">
-          <h1 class="brand-name">MIDNIGHT COFFEE RADIO</h1>
-          <p class="brand-tagline">☕ 24/7 Chill Lo-Fi Music Station • 100% Free For Creators</p>
+          <h1 class="brand-name" id="brandName">MIDNIGHT COFFEE RADIO</h1>
+          <p class="brand-tagline" id="brandTagline">☕ 24/7 Chill Lo-Fi Music Station • 100% Free For Creators</p>
         </div>
       </div>
       <div class="header-right">
+        <!-- 多语言切换选择器 (4 国语言像素风胶囊按钮) -->
+        <div class="lang-switch-group" id="langSwitchGroup">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="zh">中文</button>
+          <button class="lang-btn" data-lang="ja">日本語</button>
+          <button class="lang-btn" data-lang="ko">한국어</button>
+        </div>
         <a href="https://www.youtube.com/channel/UCFjfUNEtwx_98dDEOpYoqjQ" target="_blank" class="pixel-btn live-btn">
-          <span class="live-dot"></span> LIVE ON YOUTUBE
+          <span class="live-dot"></span> <span id="liveBtnText">LIVE ON YOUTUBE</span>
         </a>
       </div>
     </header>
@@ -94,7 +101,7 @@
           <button class="pixel-btn control-btn" id="shuffleBtn" title="Toggle Shuffle">🔀 SHUFFLE</button>
         </div>
         <div class="controls-right">
-          <button class="pixel-btn like-main-btn" id="currentLikeBtn">♥ LIKE (<span id="currentLikeCount">0</span>)</button>
+          <button class="pixel-btn like-main-btn" id="currentLikeBtn"><span id="likeBtnText">♥ LIKE</span> (<span id="currentLikeCount">0</span>)</button>
           <a href="#" class="pixel-btn download-main-btn" id="currentDownloadBtn" download>⬇ DOWNLOAD MP3</a>
           <div class="volume-container">
             <span class="vol-icon">🔊</span>
@@ -110,8 +117,8 @@
       <section class="tracklist-container pixel-box">
         <div class="section-header">
           <div class="section-title-wrap">
-            <h3 class="section-title">📂 VIBE VAULT (101 TRACKS)</h3>
-            <span class="section-subtitle">Click to stream • 100% Free CC0 / Commercial Safe</span>
+            <h3 class="section-title" id="vibeTitle">📂 VIBE VAULT (101 TRACKS)</h3>
+            <span class="section-subtitle" id="vibeSub">Click to stream • 100% Free CC0 / Commercial Safe</span>
           </div>
           <!-- 搜索过滤 -->
           <div class="search-box">
@@ -146,8 +153,8 @@
         <!-- 每周十佳名人堂榜单 (置顶) -->
         <div class="sidebar-card pixel-box fame-card">
           <div class="fame-header">
-            <h4>🏆 WEEKLY TOP 10</h4>
-            <span class="fame-sub">Hall of Fame • Most Loved</span>
+            <h4 id="weeklyTop10Title">🏆 WEEKLY TOP 10</h4>
+            <span class="fame-sub" id="hallOfFameSub">Hall of Fame • Most Loved</span>
           </div>
           <div class="fame-list" id="fameList">
             <!-- 由 app.js 动态渲染 -->
@@ -156,12 +163,12 @@
 
         <!-- 创作者商用版权许可说明卡片 -->
         <div class="sidebar-card pixel-box license-card">
-          <h4>📜 CREATOR LICENSE</h4>
-          <p>Every track is generated with Google DeepMind Lyria 3.5. <strong>100% Royalty Free & Safe</strong> for YouTube videos, Twitch streams, podcasts, and indie games.</p>
+          <h4 id="creatorLicenseTitle">📜 CREATOR LICENSE</h4>
+          <p id="licenseDesc">Every track is generated with Google DeepMind Lyria 3.5. <strong>100% Royalty Free & Safe</strong> for YouTube videos, Twitch streams, podcasts, and indie games.</p>
           <div class="license-tags">
-            <span class="pill-tag">✓ No Copyright Strikes</span>
-            <span class="pill-tag">✓ Commercial Monetizable</span>
-            <span class="pill-tag">✓ SynthID Cleared</span>
+            <span class="pill-tag" id="pillTag1">✓ No Copyright Strikes</span>
+            <span class="pill-tag" id="pillTag2">✓ Commercial Monetizable</span>
+            <span class="pill-tag" id="pillTag3">✓ SynthID Cleared</span>
           </div>
         </div>
       </aside>
@@ -169,10 +176,10 @@
 
     <!-- 底部页脚 -->
     <footer class="pixel-footer">
-      <p>© 2026 Midnight Coffee Radio • Powered by Google AI Pro & Lyria 3.5 • Broadcast from Seoul KT Hub</p>
+      <p id="footerCopyright">© 2026 Midnight Coffee Radio • Powered by Google AI Pro & Lyria 3.5 • Broadcast from Seoul KT Hub</p>
       <p class="footer-links">
-        <a href="https://www.youtube.com/channel/UCFjfUNEtwx_98dDEOpYoqjQ" target="_blank">YouTube Live Stream</a> • 
-        <a href="#catAvatar">Back to Top ☕</a>
+        <a href="https://www.youtube.com/channel/UCFjfUNEtwx_98dDEOpYoqjQ" target="_blank" id="footerLiveLink">YouTube Live Stream</a> • 
+        <a href="#catAvatar" id="footerTopLink">Back to Top ☕</a>
       </p>
     </footer>
   </div>
@@ -180,8 +187,9 @@
   <!-- 原生 HTML5 音频引擎 (隐藏) -->
   <audio id="audioEngine" preload="metadata"></audio>
 
-  <!-- 引入全量曲库数据 (支持 file:/// 本地双击零跨域直接播放) -->
+  <!-- 引入全量曲库数据与多语言字典 (支持 file:/// 本地双击零跨域直接播放) -->
   <script src="data/tracks.js"></script>
+  <script src="data/i18n.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

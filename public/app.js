@@ -45,6 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
   let isShuffle = false;
   let currentCategory = 'all';
 
+  // 多语言国际化 (i18n) 状态管理 (中 / 日 / 韩 / 英)
+  function detectInitialLang() {
+    const saved = localStorage.getItem('mcr_lang');
+    if (saved && ['en', 'zh', 'ja', 'ko'].includes(saved)) return saved;
+    const nav = (navigator.language || '').toLowerCase();
+    if (nav.startsWith('zh')) return 'zh';
+    if (nav.startsWith('ja')) return 'ja';
+    if (nav.startsWith('ko')) return 'ko';
+    return 'en';
+  }
+  let currentLang = detectInitialLang();
+
+  function getI18nDict() {
+    return (window.I18N_DATA && window.I18N_DATA[currentLang]) || (window.I18N_DATA && window.I18N_DATA.en) || {};
+  }
+
   // 真实点赞数据中心 (本地只保留“我点赞过的曲目”，全网总票数通过 Cloudflare D1 云数据库同步)
   let userLikes = JSON.parse(localStorage.getItem('mcr_user_likes') || '{}');
   // 彻底清除旧版本遗留在客户端的伪单机账本
@@ -131,6 +147,113 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // 多语言国际化 (i18n) 动态文本切换引擎
+  function applyLanguage(lang) {
+    if (!['en', 'zh', 'ja', 'ko'].includes(lang)) lang = 'en';
+    currentLang = lang;
+    localStorage.setItem('mcr_lang', lang);
+
+    // 1. 更新顶部语言切换按钮激活态
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+
+    const dict = getI18nDict();
+
+    // 2. 更新页面静态核心文本
+    const elBrandName = document.getElementById('brandName');
+    if (elBrandName && dict.brandName) elBrandName.textContent = dict.brandName;
+
+    const elBrandTagline = document.getElementById('brandTagline');
+    if (elBrandTagline && dict.brandTagline) elBrandTagline.textContent = dict.brandTagline;
+
+    const elLiveBtnText = document.getElementById('liveBtnText');
+    if (elLiveBtnText && dict.liveBtn) elLiveBtnText.textContent = dict.liveBtn;
+
+    const elCatBubble = document.getElementById('catBubble');
+    if (elCatBubble && dict.catBubble) elCatBubble.textContent = dict.catBubble;
+
+    const elArtist = document.getElementById('playerArtist');
+    if (elArtist && dict.artistSubtitle) elArtist.textContent = dict.artistSubtitle;
+
+    const elPrevBtn = document.getElementById('prevBtn');
+    if (elPrevBtn && dict.prevBtn) elPrevBtn.textContent = dict.prevBtn;
+
+    const elNextBtn = document.getElementById('nextBtn');
+    if (elNextBtn && dict.nextBtn) elNextBtn.textContent = dict.nextBtn;
+
+    const elShuffleBtn = document.getElementById('shuffleBtn');
+    if (elShuffleBtn && dict.shuffleBtn && !isShuffle) elShuffleBtn.textContent = dict.shuffleBtn;
+
+    const elLikeBtnText = document.getElementById('likeBtnText');
+    if (elLikeBtnText && dict.likeBtn) elLikeBtnText.textContent = dict.likeBtn;
+
+    const elDownloadBtn = document.getElementById('currentDownloadBtn');
+    if (elDownloadBtn && dict.downloadBtn) elDownloadBtn.textContent = dict.downloadBtn;
+
+    const elVibeTitle = document.getElementById('vibeTitle');
+    if (elVibeTitle && dict.vibeTitle) elVibeTitle.textContent = dict.vibeTitle;
+
+    const elVibeSub = document.getElementById('vibeSub');
+    if (elVibeSub && dict.vibeSub) elVibeSub.textContent = dict.vibeSub;
+
+    const elSearchInput = document.getElementById('searchInput');
+    if (elSearchInput && dict.searchPlaceholder) elSearchInput.placeholder = dict.searchPlaceholder;
+
+    const elWeeklyTop10Title = document.getElementById('weeklyTop10Title');
+    if (elWeeklyTop10Title && dict.weeklyTop10) elWeeklyTop10Title.textContent = dict.weeklyTop10;
+
+    const elHallOfFameSub = document.getElementById('hallOfFameSub');
+    if (elHallOfFameSub && dict.hallOfFame) elHallOfFameSub.textContent = dict.hallOfFame;
+
+    const elCreatorLicenseTitle = document.getElementById('creatorLicenseTitle');
+    if (elCreatorLicenseTitle && dict.creatorLicense) elCreatorLicenseTitle.textContent = dict.creatorLicense;
+
+    const elLicenseDesc = document.getElementById('licenseDesc');
+    if (elLicenseDesc && dict.licenseDesc) elLicenseDesc.innerHTML = dict.licenseDesc;
+
+    const elPillTag1 = document.getElementById('pillTag1');
+    if (elPillTag1 && dict.pillTag1) elPillTag1.textContent = dict.pillTag1;
+
+    const elPillTag2 = document.getElementById('pillTag2');
+    if (elPillTag2 && dict.pillTag2) elPillTag2.textContent = dict.pillTag2;
+
+    const elPillTag3 = document.getElementById('pillTag3');
+    if (elPillTag3 && dict.pillTag3) elPillTag3.textContent = dict.pillTag3;
+
+    const elFooterCopyright = document.getElementById('footerCopyright');
+    if (elFooterCopyright && dict.footerCopyright) elFooterCopyright.textContent = dict.footerCopyright;
+
+    const elFooterLiveLink = document.getElementById('footerLiveLink');
+    if (elFooterLiveLink && dict.footerLive) elFooterLiveLink.textContent = dict.footerLive;
+
+    const elFooterTopLink = document.getElementById('footerTopLink');
+    if (elFooterTopLink && dict.footerTop) elFooterTopLink.textContent = dict.footerTop;
+
+    // 3. 刷新分类标签按钮文本
+    if (categoryTabs && dict.categories) {
+      categoryTabs.querySelectorAll('.cat-tab-btn').forEach(btn => {
+        const cat = btn.getAttribute('data-cat');
+        if (dict.categories[cat]) {
+          btn.textContent = dict.categories[cat];
+        }
+      });
+    }
+
+    // 4. 刷新当前播放曲目分类徽章
+    if (currentIndex >= 0 && filteredTracks[currentIndex]) {
+      const cur = filteredTracks[currentIndex];
+      const curCatName = (dict.categories && dict.categories[cur.category_code]) || cur.category_name;
+      playerCategoryBadge.textContent = `[${curCatName}]`;
+    } else {
+      playerTrackTitle.textContent = dict.selectTrack || 'Select a track to play...';
+    }
+
+    updatePlayBtnState();
+    renderTracksList();
+    renderHallOfFame();
+  }
+
   function initTracks(data) {
     allTracks = data;
     allTracks.forEach(t => {
@@ -141,6 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (allTracks.length > 0) {
       loadTrack(0, false);
     }
+    // 应用当前语言
+    applyLanguage(currentLang);
     // 异步拉取全网 D1 真实云端总账本
     loadCloudStats();
   }
@@ -169,21 +294,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderTracksList() {
+    const dict = getI18nDict();
     if (filteredTracks.length === 0) {
-      tracksListContainer.innerHTML = '<div style="padding: 30px; text-align: center; color: #a69bb8;">No tracks found matching your search.</div>';
+      tracksListContainer.innerHTML = `<div style="padding: 30px; text-align: center; color: #a69bb8;">${dict.noTracksFound || 'No tracks found matching your search.'}</div>`;
       return;
     }
 
     tracksListContainer.innerHTML = filteredTracks.map((t, idx) => {
       const isCurrent = currentIndex >= 0 && filteredTracks[currentIndex] && filteredTracks[currentIndex].id === t.id;
       const isLiked = !!userLikes[t.id];
+      const catDisplay = (dict.categories && dict.categories[t.category_code]) || t.category_name;
       return `
         <div class="track-item ${isCurrent ? 'playing' : ''}" data-id="${t.id}">
           <div class="track-left">
             <span class="track-num">${String(t.id).padStart(3, '0')}</span>
             <div class="track-info-wrap">
               <div class="track-name-text">${t.title}</div>
-              <span class="track-cat-pill" data-cat="${t.category_code}">[${t.category_name}]</span>
+              <span class="track-cat-pill" data-cat="${t.category_code}">[${catDisplay}]</span>
             </div>
           </div>
           <div class="track-right">
@@ -239,14 +366,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. 真实每周十佳名人堂榜单
   function renderHallOfFame() {
+    const dict = getI18nDict();
     // 仅筛选拥有真实票数 (> 0) 的歌曲进行排行
     const votedTracks = allTracks.filter(t => (t.likes || 0) > 0);
     
     if (votedTracks.length === 0) {
       fameListContainer.innerHTML = `
-        <div style="padding: 16px 10px; text-align: center; color: #a69bb8; font-size: 11px;">
-          No votes yet!<br>
-          <span style="color: var(--accent-gold);">Click ♥ on any track to start the ranking!</span>
+        <div style="padding: 16px 10px; text-align: center; color: #a69bb8; font-size: 11px; line-height: 1.6;">
+          ${dict.noVotesYet || 'NO VOTES YET! CLICK ♥ ON ANY TRACK TO START THE RANKING!'}
         </div>
       `;
       return;
@@ -363,7 +490,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     audio.src = track.src;
     playerTrackTitle.textContent = track.title;
-    playerCategoryBadge.textContent = `[${track.category_name}]`;
+    const dict = getI18nDict();
+    const curCatName = (dict.categories && dict.categories[track.category_code]) || track.category_name;
+    playerCategoryBadge.textContent = `[${curCatName}]`;
     currentLikeCount.textContent = track.likes || 0;
     currentLikeBtn.style.color = userLikes[track.id] ? '#ff79c6' : '';
     totalTimeLabel.textContent = track.duration;
@@ -378,14 +507,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updatePlayBtnState() {
+    const dict = getI18nDict();
     if (audio.paused) {
-      playBtn.textContent = '▶ PLAY';
+      playBtn.textContent = dict.playBtn || '▶ PLAY';
       playBtn.style.background = 'var(--accent-amber)';
       if (spoolLeft) spoolLeft.classList.remove('spinning');
       if (spoolRight) spoolRight.classList.remove('spinning');
       if (playLed) playLed.classList.remove('active');
     } else {
-      playBtn.textContent = '⏸ PAUSE';
+      playBtn.textContent = dict.pauseBtn || '⏸ PAUSE';
       playBtn.style.background = 'var(--accent-gold)';
       if (spoolLeft) spoolLeft.classList.add('spinning');
       if (spoolRight) spoolRight.classList.add('spinning');
@@ -523,19 +653,31 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFilters();
   });
 
-  // 猫咪彩蛋
+  // 语言切换监听器 (4 国语言无感热切换)
+  const langSwitchGroup = document.getElementById('langSwitchGroup');
+  if (langSwitchGroup) {
+    langSwitchGroup.addEventListener('click', (e) => {
+      const btn = e.target.closest('.lang-btn');
+      if (!btn) return;
+      const targetLang = btn.getAttribute('data-lang');
+      if (targetLang && targetLang !== currentLang) {
+        applyLanguage(targetLang);
+      }
+    });
+  }
+
+  // 猫咪互动彩蛋 (多语言随机治愈寄语)
   const catAvatar = document.getElementById('catAvatar');
   const catBubble = document.getElementById('catBubble');
-  const meowMessages = [
-    "Purr... Enjoy the coffee! 🐾",
-    "Focus mode on! Coding time! 💻",
-    "Rainy days are the coziest 🌧️",
-    "Midnight vibes only ✨",
-    "Meow! 101 Lyria beats for you ☕",
-    "Stay relaxed and drink water 🌿"
-  ];
   catAvatar.addEventListener('click', () => {
-    const randomMsg = meowMessages[Math.floor(Math.random() * meowMessages.length)];
+    const dict = getI18nDict();
+    const quotes = dict.catQuotes || [
+      "Purr... Enjoy the coffee! 🐾",
+      "Focus mode on! Coding time! 💻",
+      "Rainy days are the coziest 🌧️",
+      "Midnight vibes only ✨"
+    ];
+    const randomMsg = quotes[Math.floor(Math.random() * quotes.length)];
     catBubble.textContent = randomMsg;
     catBubble.style.opacity = '1';
     catBubble.style.transform = 'translateY(0)';
