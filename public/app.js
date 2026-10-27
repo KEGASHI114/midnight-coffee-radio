@@ -45,15 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let isShuffle = false;
   let currentCategory = 'all';
 
-  // 多语言国际化 (i18n) 状态管理 (中 / 日 / 韩 / 英)
+  // 多语言国际化 (i18n) 状态管理 (严格强制默认英文，支持手动切换 中 / 日 / 韩)
   function detectInitialLang() {
     const saved = localStorage.getItem('mcr_lang');
     if (saved && ['en', 'zh', 'ja', 'ko'].includes(saved)) return saved;
-    const nav = (navigator.language || '').toLowerCase();
-    if (nav.startsWith('zh')) return 'zh';
-    if (nav.startsWith('ja')) return 'ja';
-    if (nav.startsWith('ko')) return 'ko';
-    return 'en';
+    return 'en'; // 默认英文
   }
   let currentLang = detectInitialLang();
 
