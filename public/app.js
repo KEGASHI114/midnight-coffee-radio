@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const categoryTabs = document.getElementById('categoryTabs');
   const bulkDownloadBtn = document.getElementById('bulkDownloadBtn');
 
+  // 拟物化卡带机组件引用
+  const spoolLeft = document.getElementById('spoolLeft');
+  const spoolRight = document.getElementById('spoolRight');
+  const playLed = document.getElementById('playLed');
+
   // 2. 状态变量
   let allTracks = [];
   let filteredTracks = [];
@@ -141,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="track-num">${String(t.id).padStart(3, '0')}</span>
             <div class="track-info-wrap">
               <div class="track-name-text">${t.title}</div>
-              <span class="track-cat-pill">[${t.category_name}]</span>
+              <span class="track-cat-pill" data-cat="${t.category_code}">[${t.category_name}]</span>
             </div>
           </div>
           <div class="track-right">
@@ -154,29 +159,35 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }).join('');
 
-    // 绑定列表内交互
+    // 绑定列表内交互 (使用直接监听，确保移动端触控 100% 灵敏响应)
     tracksListContainer.querySelectorAll('.track-item').forEach(item => {
-      item.addEventListener('click', (e) => {
-        const id = parseInt(item.getAttribute('data-id'), 10);
-        
-        // 1. 点赞响应
-        if (e.target.closest('.like-track-btn')) {
+      const id = parseInt(item.getAttribute('data-id'), 10);
+      
+      // 1. 点赞直接响应 (阻止冒泡，触发爱心粒子)
+      const likeBtn = item.querySelector('.like-track-btn');
+      if (likeBtn) {
+        likeBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          toggleLike(id);
-          return;
-        }
+          e.preventDefault();
+          toggleLike(id, e);
+        });
+      }
 
-        // 2. 单曲下载响应 (阻止跳页，触发真实 Blob 下载)
-        const dlBtn = e.target.closest('.single-dl-btn');
-        if (dlBtn) {
+      // 2. 单曲下载直接响应 (阻止跳页，触发真实 Blob 下载)
+      const dlBtn = item.querySelector('.single-dl-btn');
+      if (dlBtn) {
+        dlBtn.addEventListener('click', (e) => {
           e.stopPropagation();
+          e.preventDefault();
           const audioUrl = dlBtn.getAttribute('data-url');
           const fileName = dlBtn.getAttribute('data-name');
           forceDownload(audioUrl, fileName, dlBtn);
-          return;
-        }
+        });
+      }
 
-        // 3. 播放切换
+      // 3. 点击整行播放切换
+      item.addEventListener('click', (e) => {
+        if (e.target.closest('button') || e.target.closest('a')) return;
         const fIdx = filteredTracks.findIndex(t => t.id === id);
         if (fIdx !== -1) {
           if (currentIndex === fIdx && !audio.paused) {
@@ -234,8 +245,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 像素心动爱心微粒爆发引擎
+  function spawnHeartBurst(x, y) {
+    if (!x || !y) return;
+    const count = 7;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'pixel-heart-particle';
+      p.textContent = '♥';
+      p.style.left = `${x}px`;
+      p.style.top = `${y}px`;
+
+      const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
+      const dist = Math.random() * 45 + 30;
+      const tx = Math.cos(angle) * dist;
+      const ty = Math.sin(angle) * dist - 28;
+
+      p.style.setProperty('--tx', `${tx}px`);
+      p.style.setProperty('--ty', `${ty}px`);
+      p.style.fontSize = `${Math.floor(Math.random() * 8) + 12}px`;
+
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 950);
+    }
+  }
+
   // 7. 真实点赞数据增减与本地持久化
-  function toggleLike(id) {
+  function toggleLike(id, event = null) {
     const track = allTracks.find(t => t.id === id);
     if (!track) return;
 
@@ -245,14 +281,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       userLikes[id] = true;
       track.likes = (track.likes || 0) + 1;
+      if (event && event.clientX) {
+        spawnHeartBurst(event.clientX, event.clientY);
+      }
     }
 
-    // 保存当前用户的点赞状态与全局票数账本
     realVotesBook[id] = track.likes;
     localStorage.setItem('mcr_user_likes', JSON.stringify(userLikes));
     localStorage.setItem('mcr_real_votes', JSON.stringify(realVotesBook));
 
-    // 联动刷新播放器赞数
     if (currentIndex >= 0 && filteredTracks[currentIndex] && filteredTracks[currentIndex].id === id) {
       currentLikeCount.textContent = track.likes;
       currentLikeBtn.style.color = userLikes[id] ? '#ff79c6' : '';
@@ -288,9 +325,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (audio.paused) {
       playBtn.textContent = '▶ PLAY';
       playBtn.style.background = 'var(--accent-amber)';
+      if (spoolLeft) spoolLeft.classList.remove('spinning');
+      if (spoolRight) spoolRight.classList.remove('spinning');
+      if (playLed) playLed.classList.remove('active');
     } else {
       playBtn.textContent = '⏸ PAUSE';
       playBtn.style.background = 'var(--accent-gold)';
+      if (spoolLeft) spoolLeft.classList.add('spinning');
+      if (spoolRight) spoolRight.classList.add('spinning');
+      if (playLed) playLed.classList.add('active');
     }
   }
 
@@ -391,9 +434,9 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.volume = parseFloat(e.target.value);
   });
 
-  currentLikeBtn.addEventListener('click', () => {
+  currentLikeBtn.addEventListener('click', (e) => {
     if (currentIndex >= 0 && filteredTracks[currentIndex]) {
-      toggleLike(filteredTracks[currentIndex].id);
+      toggleLike(filteredTracks[currentIndex].id, e);
     }
   });
 
@@ -439,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomMsg = meowMessages[Math.floor(Math.random() * meowMessages.length)];
     catBubble.textContent = randomMsg;
     catBubble.style.opacity = '1';
-    catBubble.style.transform = 'translateX(-50%) translateY(-10px)';
+    catBubble.style.transform = 'translateY(0)';
     setTimeout(() => {
       catBubble.style.opacity = '';
       catBubble.style.transform = '';
@@ -447,55 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==============================================================================
-  // 9. Canvas 动态引擎一：全屏像素雨丝 (Pixel Rain Engine)
-  // ==============================================================================
-  const rainCanvas = document.getElementById('pixelRainCanvas');
-  const rainCtx = rainCanvas.getContext('2d');
-  let raindrops = [];
-
-  function resizeRainCanvas() {
-    rainCanvas.width = window.innerWidth;
-    rainCanvas.height = window.innerHeight;
-    initRaindrops();
-  }
-
-  function initRaindrops() {
-    raindrops = [];
-    const count = Math.floor(window.innerWidth / 16);
-    for (let i = 0; i < count; i++) {
-      raindrops.push({
-        x: Math.random() * rainCanvas.width,
-        y: Math.random() * rainCanvas.height,
-        len: Math.floor(Math.random() * 8) + 6,
-        speed: Math.random() * 2 + 3
-      });
-    }
-  }
-
-  window.addEventListener('resize', resizeRainCanvas);
-  resizeRainCanvas();
-
-  function renderRain() {
-    rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
-    rainCtx.fillStyle = 'rgba(139, 233, 253, 0.4)';
-
-    for (let i = 0; i < raindrops.length; i++) {
-      const r = raindrops[i];
-      rainCtx.fillRect(Math.floor(r.x), Math.floor(r.y), 2, r.len);
-      r.y += r.speed;
-      r.x -= 0.5;
-
-      if (r.y > rainCanvas.height) {
-        r.y = -10;
-        r.x = Math.random() * rainCanvas.width;
-      }
-    }
-    requestAnimationFrame(renderRain);
-  }
-  renderRain();
-
-  // ==============================================================================
-  // 10. Canvas 动态引擎二：【真实声学 FFT 傅里叶变换】像素音频跳动谱 (Web Audio API)
+  // 9. Canvas 动态引擎：【真实物理 FFT 傅里叶声学频谱】18 频段均衡跳动谱
   // ==============================================================================
   const visCanvas = document.getElementById('visualizerCanvas');
   const visCtx = visCanvas.getContext('2d');
@@ -503,6 +498,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const barWidth = 8;
   const barGap = 4;
   let barHeights = new Array(BAR_COUNT).fill(2);
+  let peakHeights = new Array(BAR_COUNT).fill(2);
+  let peakSpeeds = new Array(BAR_COUNT).fill(0);
+
+  // 18 根像素柱的对数人耳频段映射 (跳过 0 索引直流杂波)
+  const binIndices = [
+    1, 2, 3, 4, 5, 7, 9, 11, 14, 17, 21, 26, 31, 37, 43, 49, 55, 61
+  ];
+
+  // 声学等响曲线加权 (彻底解决前两个低音柱过高爆满、中高音不跳的问题)
+  const weightCurve = [
+    0.46, 0.50, 0.58, 0.68, 0.78, 0.90, 1.05, 1.20, 1.35, 1.45, 1.55, 1.68, 1.80, 1.92, 2.05, 2.15, 2.25, 2.35
+  ];
 
   let audioCtx = null;
   let analyser = null;
@@ -524,8 +531,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       audioCtx = new AudioContextClass();
       analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 64; // 提供 32 个精准频段采样
-      analyser.smoothingTimeConstant = 0.82; // 优雅的声波平滑衰减
+      analyser.fftSize = 128; // 提供 64 个细腻频段采样
+      analyser.smoothingTimeConstant = 0.84; // 顺滑阻尼衰减
 
       sourceNode = audioCtx.createMediaElementSource(audio);
       sourceNode.connect(analyser);
@@ -533,7 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       freqDataArray = new Uint8Array(analyser.frequencyBinCount);
       isWebAudioActive = true;
-      console.log('[Web Audio] 真实声波物理分析器 (FFT AnalyserNode) 成功挂载！');
+      console.log('[Web Audio] 真实声波物理分析器 (64-Bin FFT) 成功挂载！');
     } catch (e) {
       console.warn('[Web Audio] 自动跨域嗅探受限，启用备选声学采样:', e);
     }
@@ -544,7 +551,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const isPlaying = !audio.paused && !audio.ended;
 
     if (isPlaying && isWebAudioActive && analyser) {
-      // 真实读取声卡的 FFT 傅里叶频率分量 (0 ~ 255)
       analyser.getByteFrequencyData(freqDataArray);
     }
 
@@ -553,24 +559,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (isPlaying) {
         if (isWebAudioActive && freqDataArray) {
-          // 频段精细映射：
-          // i: 0~4 -> 低频 (Bass / 鼓点，高能量)
-          // i: 5~11 -> 中频 (Piano / 旋律，活跃)
-          // i: 12~17 -> 高频 (Rain / 黑胶杂音，清脆微动)
-          const binIndex = Math.min(freqDataArray.length - 1, Math.floor(i * 1.3) + 1);
-          const rawAmp = freqDataArray[binIndex] || 0;
-          // 振幅归一化到画布高度 (最大 40px)
-          targetHeight = Math.max(2, (rawAmp / 255) * 40);
+          const binIdx = Math.min(freqDataArray.length - 1, binIndices[i] || i);
+          const rawAmp = freqDataArray[binIdx] || 0;
+          const weight = weightCurve[i] || 1.0;
+          // 经过声学等响补偿后的真实高度 (最大 40px)
+          const compensated = (rawAmp / 255) * weight * 36;
+          targetHeight = Math.max(2, Math.min(42, compensated));
         } else {
-          // 备用极简自然微动 (未连接声卡时的优雅状态)
-          targetHeight = 4 + Math.sin(Date.now() / 150 + i) * 3;
+          targetHeight = 4 + Math.sin(Date.now() / 150 + i * 0.5) * 3;
         }
       } else {
         targetHeight = 2;
       }
 
-      // 平滑插值 (保持像素柱回落顺滑)
+      // 平滑插值上升与回落
       barHeights[i] += (targetHeight - barHeights[i]) * 0.28;
+
+      // 顶部白色悬浮小盖帽物理重力掉落计算
+      if (targetHeight >= peakHeights[i]) {
+        peakHeights[i] = targetHeight;
+        peakSpeeds[i] = 0;
+      } else {
+        peakSpeeds[i] += 0.32; // 模拟重力加速度
+        peakHeights[i] = Math.max(targetHeight, peakHeights[i] - peakSpeeds[i]);
+      }
 
       const x = i * (barWidth + barGap) + 4;
       const h = Math.max(2, barHeights[i]);
@@ -588,9 +600,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // 绘制主像素柱
       visCtx.fillRect(x, Math.floor(y), barWidth, Math.ceil(h));
 
-      // 顶部白色像素小悬浮帽
+      // 绘制带物理重力回落的白色像素小盖帽
+      const capY = Math.max(0, visCanvas.height - peakHeights[i] - 2);
       visCtx.fillStyle = '#ffffff';
-      visCtx.fillRect(x, Math.max(0, Math.floor(y) - 2), barWidth, 2);
+      visCtx.fillRect(x, Math.floor(capY), barWidth, 2);
     }
 
     requestAnimationFrame(renderVisualizer);

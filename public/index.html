@@ -14,8 +14,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Canvas 动态背景粒子引擎 (像素雨丝与环境氛围) -->
-  <canvas id="pixelRainCanvas"></canvas>
+  <!-- 沉浸式东京雨夜像素咖啡馆全景大背景 (纯净通透，无雨点杂色干扰) -->
+  <div class="pixel-backdrop"></div>
+  <div class="pixel-backdrop-overlay"></div>
 
   <div class="site-wrapper">
     <!-- 顶部状态导航栏 -->
@@ -37,7 +38,7 @@
       </div>
     </header>
 
-    <!-- 核心像素音频播放器 -->
+    <!-- 核心像素音频播放器 (带 16-bit 拟物卡带机) -->
     <section class="player-section pixel-box">
       <div class="player-top">
         <div class="now-playing-info">
@@ -45,6 +46,29 @@
           <h2 class="current-track-title" id="playerTrackTitle">Select a track to play...</h2>
           <span class="current-track-artist" id="playerArtist">Midnight Coffee Radio • Google Lyria 3.5</span>
         </div>
+
+        <!-- 拟物化 16-bit 复古卡带机组件 (双转动齿轮与双色 LED) -->
+        <div class="cassette-deck">
+          <div class="cassette-body">
+            <div class="cassette-top-bar">
+              <span class="cassette-brand">MCR • C-90</span>
+              <div class="cassette-leds">
+                <span class="led led-pwr" title="Power Ready"></span>
+                <span class="led led-play" id="playLed" title="Playing Stereo"></span>
+              </div>
+            </div>
+            <div class="cassette-window">
+              <div class="spool spool-left" id="spoolLeft">
+                <div class="spool-cog"></div>
+              </div>
+              <div class="tape-ribbon"></div>
+              <div class="spool spool-right" id="spoolRight">
+                <div class="spool-cog"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- 像素音频频谱动效画布 -->
         <div class="visualizer-container">
           <canvas id="visualizerCanvas" width="220" height="48"></canvas>
