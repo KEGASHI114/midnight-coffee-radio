@@ -38,12 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const spoolRight = document.getElementById('spoolRight');
   const playLed = document.getElementById('playLed');
 
-  // 2. 状态变量
+  // 2. 状态与音频引擎核心引用
   let allTracks = [];
   let filteredTracks = [];
   let currentIndex = -1;
   let isShuffle = false;
   let currentCategory = 'all';
+
+  // Web Audio 声学分析引擎引用 (提升至顶部，杜绝 TDZ 变量未初始化引用错误)
+  let audioCtx = null;
+  let analyser = null;
+  let sourceNode = null;
+  let freqDataArray = null;
+  let isWebAudioActive = false;
+
+  // 极速双缓冲后台静默预加载专用 Audio 对象
+  const preloaderAudio = new Audio();
+  preloaderAudio.preload = 'auto';
 
   // 多语言国际化 (i18n) 状态管理 (严格强制默认英文，支持手动切换 中 / 日 / 韩)
   function detectInitialLang() {
@@ -582,7 +593,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // 3. 点击整行播放切换
+      // 2.5 列表行内播放/暂停小按钮直接响应
+      const playTrackBtn = item.querySelector('.play-track-btn');
+      if (playTrackBtn) {
+        playTrackBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          const fIdx = filteredTracks.findIndex(t => t.id === id);
+          if (fIdx !== -1) {
+            if (currentIndex === fIdx && !audio.paused) {
+              audio.pause();
+            } else {
+              loadTrack(fIdx, true);
+            }
+          }
+        });
+      }
+
+      // 3. 点击整行空白或标题播放切换
       item.addEventListener('click', (e) => {
         if (e.target.closest('button') || e.target.closest('a')) return;
         const fIdx = filteredTracks.findIndex(t => t.id === id);
@@ -715,7 +743,39 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(err => console.log('[Cloud D1 Sync Error]', err));
   }
 
-  // 8. 播放器核心
+  // 8. 播放器核心与极速流媒体加载引擎
+  function preloadNextTrack() {
+    if (!filteredTracks || filteredTracks.length <= 1) return;
+    let nextIdx = currentIndex + 1;
+    if (isShuffle) {
+      nextIdx = Math.floor(Math.random() * filteredTracks.length);
+    } else if (nextIdx >= filteredTracks.length) {
+      nextIdx = 0;
+    }
+    const nextTrack = filteredTracks[nextIdx];
+    if (nextTrack && nextTrack.src && preloaderAudio.src !== nextTrack.src) {
+      preloaderAudio.src = nextTrack.src;
+      preloaderAudio.load();
+    }
+  }
+
+  // 靶向更新曲目播放状态 (避免全量重建 101 个 DOM 节点引发主线程掉帧)
+  function updateTrackItemPlayingUI() {
+    if (!tracksListContainer) return;
+    const curId = currentIndex >= 0 && filteredTracks[currentIndex] ? filteredTracks[currentIndex].id : null;
+    const isPlaying = !audio.paused;
+
+    tracksListContainer.querySelectorAll('.track-item').forEach(item => {
+      const id = parseInt(item.getAttribute('data-id'), 10);
+      const isCur = id === curId;
+      item.classList.toggle('playing', isCur);
+      const btn = item.querySelector('.play-track-btn');
+      if (btn) {
+        btn.textContent = (isCur && isPlaying) ? '⏸' : '▶';
+      }
+    });
+  }
+
   function loadTrack(index, autoPlay = true) {
     if (index < 0 || index >= filteredTracks.length) return;
     currentIndex = index;
@@ -733,10 +793,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (autoPlay) {
       // 唤醒声学分析引擎
       initWebAudioVisualizer();
-      audio.play().catch(e => console.log('Autoplay prevented:', e));
+      audio.play()
+        .then(() => console.log('[Audio] Play started successfully for track:', track.title))
+        .catch(e => console.warn('[Audio] Autoplay error:', e.name, e.message));
     }
     updatePlayBtnState();
-    renderTracksList();
+    updateTrackItemPlayingUI();
+    // 触发下一首后台静默双缓冲预加载
+    preloadNextTrack();
   }
 
   function updatePlayBtnState() {
@@ -768,18 +832,18 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.pause();
     }
     updatePlayBtnState();
-    renderTracksList();
+    updateTrackItemPlayingUI();
   });
 
   audio.addEventListener('play', () => {
     initWebAudioVisualizer();
     updatePlayBtnState();
-    renderTracksList();
+    updateTrackItemPlayingUI();
   });
 
   audio.addEventListener('pause', () => {
     updatePlayBtnState();
-    renderTracksList();
+    updateTrackItemPlayingUI();
   });
 
   prevBtn.addEventListener('click', () => {
@@ -941,12 +1005,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const weightCurve = [
     0.46, 0.48, 0.52, 0.62, 0.75, 0.90, 1.05, 1.15, 1.25, 1.35, 1.50, 1.65, 1.85, 2.05, 2.30, 2.55, 2.80, 2.95
   ];
-
-  let audioCtx = null;
-  let analyser = null;
-  let sourceNode = null;
-  let freqDataArray = null;
-  let isWebAudioActive = false;
 
   function initWebAudioVisualizer() {
     if (isWebAudioActive) {

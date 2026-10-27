@@ -287,10 +287,21 @@ export default {
     }
 
     // --------------------------------------------------------------------------
-    // 7. 静态资源托管兜底 (交由 Cloudflare Workers Assets 引擎)
+    // 7. 静态资源托管兜底 (对音频文件下发 365 天不可变强缓存，实现秒开)
     // --------------------------------------------------------------------------
     if (env.ASSETS) {
-      return env.ASSETS.fetch(request);
+      const response = await env.ASSETS.fetch(request);
+      if (url.pathname.endsWith('.m4a') && (response.status === 200 || response.status === 206)) {
+        const newHeaders = new Headers(response.headers);
+        newHeaders.set('Cache-Control', 'public, max-age=31536000, immutable');
+        newHeaders.set('Accept-Ranges', 'bytes');
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: newHeaders
+        });
+      }
+      return response;
     }
 
     return new Response('Asset Binding Not Found', { status: 404 });
