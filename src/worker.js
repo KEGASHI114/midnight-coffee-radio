@@ -52,14 +52,20 @@ export default {
 
       try {
         const { results } = await env.DB.prepare(
-          'SELECT track_id, likes_count, download_count FROM track_stats'
+          'SELECT track_id, likes_count, download_count, master_genre, sub_genre, bpm, musical_key, lead_instrument, daypart_slot FROM track_stats'
         ).all();
 
         const stats = {};
         for (const row of results || []) {
           stats[row.track_id] = {
             likes: row.likes_count || 0,
-            downloads: row.download_count || 0
+            downloads: row.download_count || 0,
+            master_genre: row.master_genre,
+            sub_genre: row.sub_genre,
+            bpm: row.bpm,
+            musical_key: row.musical_key,
+            lead_instrument: row.lead_instrument,
+            daypart_slot: row.daypart_slot
           };
         }
 

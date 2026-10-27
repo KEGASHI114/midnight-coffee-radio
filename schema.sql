@@ -1,9 +1,15 @@
--- Midnight Coffee Radio: Cloudflare D1 Schema
+-- Midnight Coffee Radio: Cloudflare D1 Schema (4-Tier Standard Music Taxonomy)
 CREATE TABLE IF NOT EXISTS track_stats (
     track_id       INTEGER PRIMARY KEY,
     likes_count    INTEGER DEFAULT 0,
     download_count INTEGER DEFAULT 0,
     play_count     INTEGER DEFAULT 0,
+    master_genre   TEXT DEFAULT 'JAZZ',
+    sub_genre      TEXT DEFAULT 'JAZZ-COOL',
+    bpm            INTEGER DEFAULT 75,
+    musical_key    TEXT DEFAULT 'C Maj',
+    lead_instrument TEXT DEFAULT 'Rhodes',
+    daypart_slot   TEXT DEFAULT 'Midnight',
     updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

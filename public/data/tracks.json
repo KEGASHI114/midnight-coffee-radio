@@ -10,7 +10,16 @@
     "duration_sec": 172,
     "src": "music/01_雨夜窗台_电钢/01 - Velvet Rain.m4a",
     "download_url": "music/01_雨夜窗台_电钢/01 - Velvet Rain.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-001",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 68,
+    "musical_key": "Eb Maj",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 2,
@@ -23,7 +32,16 @@
     "duration_sec": 167,
     "src": "music/01_雨夜窗台_电钢/02 - Rainy Evening Drift.m4a",
     "download_url": "music/01_雨夜窗台_电钢/02 - Rainy Evening Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-002",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 70,
+    "musical_key": "F Min",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 3,
@@ -36,7 +54,16 @@
     "duration_sec": 180,
     "src": "music/01_雨夜窗台_电钢/03 - Mellow Study Beat.m4a",
     "download_url": "music/01_雨夜窗台_电钢/03 - Mellow Study Beat.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-003",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 72,
+    "musical_key": "Ab Maj",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 4,
@@ -49,7 +76,16 @@
     "duration_sec": 181,
     "src": "music/01_雨夜窗台_电钢/04 - Late Night Rain.m4a",
     "download_url": "music/01_雨夜窗台_电钢/04 - Late Night Rain.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-004",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 66,
+    "musical_key": "C Min",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 5,
@@ -62,7 +98,16 @@
     "duration_sec": 175,
     "src": "music/01_雨夜窗台_电钢/05 - Vinyl Drizzle.m4a",
     "download_url": "music/01_雨夜窗台_电钢/05 - Vinyl Drizzle.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-005",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 68,
+    "musical_key": "Bb Maj",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 6,
@@ -75,7 +120,16 @@
     "duration_sec": 179,
     "src": "music/01_雨夜窗台_电钢/06 - Distant Thunder.m4a",
     "download_url": "music/01_雨夜窗台_电钢/06 - Distant Thunder.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-006",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 70,
+    "musical_key": "Db Maj",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 7,
@@ -88,7 +142,16 @@
     "duration_sec": 180,
     "src": "music/01_雨夜窗台_电钢/07 - Window Seat Reverie.m4a",
     "download_url": "music/01_雨夜窗台_电钢/07 - Window Seat Reverie.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-007",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 72,
+    "musical_key": "Eb Min",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 8,
@@ -101,7 +164,16 @@
     "duration_sec": 179,
     "src": "music/01_雨夜窗台_电钢/08 - Hazy Morning Dew.m4a",
     "download_url": "music/01_雨夜窗台_电钢/08 - Hazy Morning Dew.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-008",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 68,
+    "musical_key": "G Min",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 9,
@@ -114,7 +186,16 @@
     "duration_sec": 147,
     "src": "music/01_雨夜窗台_电钢/09 - Peaceful Daydream.m4a",
     "download_url": "music/01_雨夜窗台_电钢/09 - Peaceful Daydream.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-009",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 70,
+    "musical_key": "F Maj",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 10,
@@ -127,7 +208,16 @@
     "duration_sec": 176,
     "src": "music/01_雨夜窗台_电钢/10 - Windowpane Drops.m4a",
     "download_url": "music/01_雨夜窗台_电钢/10 - Windowpane Drops.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-010",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 68,
+    "musical_key": "Bb Min",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 11,
@@ -140,7 +230,16 @@
     "duration_sec": 172,
     "src": "music/01_雨夜窗台_电钢/11 - Puddle Reflection.m4a",
     "download_url": "music/01_雨夜窗台_电钢/11 - Puddle Reflection.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-011",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-FELT",
+    "sub_genre_name": "Felt Piano Solitude",
+    "bpm": 72,
+    "musical_key": "Ab Min",
+    "lead_instrument": "Felt Piano & Rain",
+    "daypart_slot": "Midnight Focus"
   },
   {
     "id": 12,
@@ -153,7 +252,16 @@
     "duration_sec": 157,
     "src": "music/02_东京深夜_编程/01 - Terminal Glow.m4a",
     "download_url": "music/02_东京深夜_编程/01 - Terminal Glow.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-012",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 84,
+    "musical_key": "C Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 13,
@@ -166,7 +274,16 @@
     "duration_sec": 179,
     "src": "music/02_东京深夜_编程/02 - Dark Mode.m4a",
     "download_url": "music/02_东京深夜_编程/02 - Dark Mode.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-013",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 86,
+    "musical_key": "G Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 14,
@@ -179,7 +296,16 @@
     "duration_sec": 180,
     "src": "music/02_东京深夜_编程/03 - Code Flow.m4a",
     "download_url": "music/02_东京深夜_编程/03 - Code Flow.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-014",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 88,
+    "musical_key": "D Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 15,
@@ -192,7 +318,16 @@
     "duration_sec": 171,
     "src": "music/02_东京深夜_编程/04 - Midnight Drift.m4a",
     "download_url": "music/02_东京深夜_编程/04 - Midnight Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-015",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 85,
+    "musical_key": "F Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 16,
@@ -205,7 +340,16 @@
     "duration_sec": 180,
     "src": "music/02_东京深夜_编程/05 - Soft Focus.m4a",
     "download_url": "music/02_东京深夜_编程/05 - Soft Focus.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-016",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 87,
+    "musical_key": "A Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 17,
@@ -218,7 +362,16 @@
     "duration_sec": 174,
     "src": "music/02_东京深夜_编程/06 - Tape Flutter Flow.m4a",
     "download_url": "music/02_东京深夜_编程/06 - Tape Flutter Flow.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-017",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 86,
+    "musical_key": "E Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 18,
@@ -231,7 +384,16 @@
     "duration_sec": 169,
     "src": "music/02_东京深夜_编程/07 - Late Night Data Center.m4a",
     "download_url": "music/02_东京深夜_编程/07 - Late Night Data Center.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-018",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 84,
+    "musical_key": "B Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 19,
@@ -244,7 +406,16 @@
     "duration_sec": 175,
     "src": "music/02_东京深夜_编程/08 - Coding Companion.m4a",
     "download_url": "music/02_东京深夜_编程/08 - Coding Companion.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-019",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 88,
+    "musical_key": "Eb Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 20,
@@ -257,7 +428,16 @@
     "duration_sec": 166,
     "src": "music/02_东京深夜_编程/09 - Nocturnal Tokyo.m4a",
     "download_url": "music/02_东京深夜_编程/09 - Nocturnal Tokyo.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-020",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 85,
+    "musical_key": "Ab Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 21,
@@ -270,7 +450,16 @@
     "duration_sec": 168,
     "src": "music/02_东京深夜_编程/10 - Soft Syntax.m4a",
     "download_url": "music/02_东京深夜_编程/10 - Soft Syntax.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-021",
+    "master_genre": "BEAT",
+    "master_genre_name": "Beatmaking & Hiphop",
+    "sub_genre": "BEAT-90S",
+    "sub_genre_name": "Dusty 90s Boom-Bap",
+    "bpm": 86,
+    "musical_key": "Bb Min",
+    "lead_instrument": "MPC3000 & Vinyl",
+    "daypart_slot": "Coding Flow"
   },
   {
     "id": 22,
@@ -283,7 +472,16 @@
     "duration_sec": 173,
     "src": "music/03_咖啡馆_弱音小号/01 - Espresso Notes.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/01 - Espresso Notes.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-022",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 74,
+    "musical_key": "Bb Maj",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 23,
@@ -296,7 +494,16 @@
     "duration_sec": 172,
     "src": "music/03_咖啡馆_弱音小号/02 - Peaceful Afternoon Jazz.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/02 - Peaceful Afternoon Jazz.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-023",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 76,
+    "musical_key": "D Min",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 24,
@@ -309,7 +516,16 @@
     "duration_sec": 176,
     "src": "music/03_咖啡馆_弱音小号/03 - Brass & Ivory.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/03 - Brass & Ivory.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-024",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 75,
+    "musical_key": "F Maj",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 25,
@@ -322,7 +538,16 @@
     "duration_sec": 177,
     "src": "music/03_咖啡馆_弱音小号/04 - Sunday Study Mood.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/04 - Sunday Study Mood.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-025",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 78,
+    "musical_key": "G Min",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 26,
@@ -335,7 +560,16 @@
     "duration_sec": 180,
     "src": "music/03_咖啡馆_弱音小号/05 - Rainy Cafe Ballad.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/05 - Rainy Cafe Ballad.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-026",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 74,
+    "musical_key": "C Maj",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 27,
@@ -348,7 +582,16 @@
     "duration_sec": 178,
     "src": "music/03_咖啡馆_弱音小号/06 - Sunset Coffee Lofi.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/06 - Sunset Coffee Lofi.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-027",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 76,
+    "musical_key": "Eb Maj",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 28,
@@ -361,7 +604,16 @@
     "duration_sec": 182,
     "src": "music/03_咖啡馆_弱音小号/07 - Intimate Jazzhop.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/07 - Intimate Jazzhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-028",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 75,
+    "musical_key": "A Min",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 29,
@@ -374,7 +626,16 @@
     "duration_sec": 180,
     "src": "music/03_咖啡馆_弱音小号/08 - Daybreak Drift.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/08 - Daybreak Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-029",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 74,
+    "musical_key": "Ab Maj",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 30,
@@ -387,7 +648,16 @@
     "duration_sec": 173,
     "src": "music/03_咖啡馆_弱音小号/09 - Afternoon Roast.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/09 - Afternoon Roast.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-030",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 77,
+    "musical_key": "E Min",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 31,
@@ -400,7 +670,16 @@
     "duration_sec": 174,
     "src": "music/03_咖啡馆_弱音小号/10 - Nocturnal Cafe Jazz.m4a",
     "download_url": "music/03_咖啡馆_弱音小号/10 - Nocturnal Cafe Jazz.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-031",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-COOL",
+    "sub_genre_name": "Cool Jazzhop",
+    "bpm": 75,
+    "musical_key": "D Maj",
+    "lead_instrument": "Harmon Mute Trumpet",
+    "daypart_slot": "Afternoon Cafe"
   },
   {
     "id": 32,
@@ -413,7 +692,16 @@
     "duration_sec": 177,
     "src": "music/04_复古磁带_八音盒/01 - Faded Keepsake.m4a",
     "download_url": "music/04_复古磁带_八音盒/01 - Faded Keepsake.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-032",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 64,
+    "musical_key": "C Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 33,
@@ -426,7 +714,16 @@
     "duration_sec": 154,
     "src": "music/04_复古磁带_八音盒/02 - Analog Afternoons.m4a",
     "download_url": "music/04_复古磁带_八音盒/02 - Analog Afternoons.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-033",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 66,
+    "musical_key": "G Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 34,
@@ -439,7 +736,16 @@
     "duration_sec": 178,
     "src": "music/04_复古磁带_八音盒/03 - Sweet Lofi Lullaby.m4a",
     "download_url": "music/04_复古磁带_八音盒/03 - Sweet Lofi Lullaby.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-034",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 65,
+    "musical_key": "D Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 35,
@@ -452,7 +758,16 @@
     "duration_sec": 175,
     "src": "music/04_复古磁带_八音盒/04 - Soft Rewind.m4a",
     "download_url": "music/04_复古磁带_八音盒/04 - Soft Rewind.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-035",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 68,
+    "musical_key": "A Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 36,
@@ -465,7 +780,16 @@
     "duration_sec": 179,
     "src": "music/04_复古磁带_八音盒/05 - Late Night Study Vibes.m4a",
     "download_url": "music/04_复古磁带_八音盒/05 - Late Night Study Vibes.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-036",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 64,
+    "musical_key": "F Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 37,
@@ -478,7 +802,16 @@
     "duration_sec": 178,
     "src": "music/04_复古磁带_八音盒/06 - Warm Frequencies.m4a",
     "download_url": "music/04_复古磁带_八音盒/06 - Warm Frequencies.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-037",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 66,
+    "musical_key": "Bb Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 38,
@@ -491,7 +824,16 @@
     "duration_sec": 178,
     "src": "music/04_复古磁带_八音盒/07 - Warm Cassette.m4a",
     "download_url": "music/04_复古磁带_八音盒/07 - Warm Cassette.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-038",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 65,
+    "musical_key": "E Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 39,
@@ -504,7 +846,16 @@
     "duration_sec": 180,
     "src": "music/04_复古磁带_八音盒/08 - Sunlit Memories.m4a",
     "download_url": "music/04_复古磁带_八音盒/08 - Sunlit Memories.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-039",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 67,
+    "musical_key": "B Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 40,
@@ -517,7 +868,16 @@
     "duration_sec": 177,
     "src": "music/04_复古磁带_八音盒/09 - Faded Afternoon.m4a",
     "download_url": "music/04_复古磁带_八音盒/09 - Faded Afternoon.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-040",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 64,
+    "musical_key": "Eb Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 41,
@@ -530,7 +890,16 @@
     "duration_sec": 167,
     "src": "music/04_复古磁带_八音盒/10 - Hypnotic Focus Loop.m4a",
     "download_url": "music/04_复古磁带_八音盒/10 - Hypnotic Focus Loop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-041",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-BOX",
+    "sub_genre_name": "Vintage Music Box",
+    "bpm": 66,
+    "musical_key": "Ab Maj",
+    "lead_instrument": "Music Box & Celesta",
+    "daypart_slot": "Nostalgia Lullaby"
   },
   {
     "id": 42,
@@ -543,7 +912,16 @@
     "duration_sec": 164,
     "src": "music/05_周日晨光_原声吉他/01 - Morning Dew.m4a",
     "download_url": "music/05_周日晨光_原声吉他/01 - Morning Dew.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-042",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 78,
+    "musical_key": "G Maj",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 43,
@@ -556,7 +934,16 @@
     "duration_sec": 175,
     "src": "music/05_周日晨光_原声吉他/02 - Warm Sunny Lofi.m4a",
     "download_url": "music/05_周日晨光_原声吉他/02 - Warm Sunny Lofi.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-043",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 80,
+    "musical_key": "D Maj",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 44,
@@ -569,7 +956,16 @@
     "duration_sec": 172,
     "src": "music/05_周日晨光_原声吉他/03 - Sunny Stroll.m4a",
     "download_url": "music/05_周日晨光_原声吉他/03 - Sunny Stroll.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-044",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 82,
+    "musical_key": "A Maj",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 45,
@@ -582,7 +978,16 @@
     "duration_sec": 178,
     "src": "music/05_周日晨光_原声吉他/04 - Golden Hour Glow.m4a",
     "download_url": "music/05_周日晨光_原声吉他/04 - Golden Hour Glow.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-045",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 79,
+    "musical_key": "E Maj",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 46,
@@ -595,7 +1000,16 @@
     "duration_sec": 179,
     "src": "music/05_周日晨光_原声吉他/05 - Fresh Balcony Air.m4a",
     "download_url": "music/05_周日晨光_原声吉他/05 - Fresh Balcony Air.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-046",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 81,
+    "musical_key": "C Maj",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 47,
@@ -608,7 +1022,16 @@
     "duration_sec": 177,
     "src": "music/05_周日晨光_原声吉他/06 - Sunny Desk Beats.m4a",
     "download_url": "music/05_周日晨光_原声吉他/06 - Sunny Desk Beats.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-047",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 78,
+    "musical_key": "B Min",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 48,
@@ -621,7 +1044,16 @@
     "duration_sec": 175,
     "src": "music/05_周日晨光_原声吉他/07 - Moss & Timber.m4a",
     "download_url": "music/05_周日晨光_原声吉他/07 - Moss & Timber.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-048",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 80,
+    "musical_key": "F# Min",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 49,
@@ -634,7 +1066,16 @@
     "duration_sec": 172,
     "src": "music/05_周日晨光_原声吉他/08 - Cozy Morning Slippers.m4a",
     "download_url": "music/05_周日晨光_原声吉他/08 - Cozy Morning Slippers.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-049",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 82,
+    "musical_key": "E Min",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 50,
@@ -647,7 +1088,16 @@
     "duration_sec": 150,
     "src": "music/05_周日晨光_原声吉他/09 - Serene Morning Chillhop.m4a",
     "download_url": "music/05_周日晨光_原声吉他/09 - Serene Morning Chillhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-050",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 79,
+    "musical_key": "A Min",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 51,
@@ -660,7 +1110,16 @@
     "duration_sec": 170,
     "src": "music/05_周日晨光_原声吉他/10 - Meditative Morning Tea.m4a",
     "download_url": "music/05_周日晨光_原声吉他/10 - Meditative Morning Tea.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-051",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-GUIT",
+    "sub_genre_name": "Bedroom Acoustic Guitar",
+    "bpm": 81,
+    "musical_key": "D Min",
+    "lead_instrument": "Fingerstyle Nylon Guitar",
+    "daypart_slot": "Morning Sunshine"
   },
   {
     "id": 52,
@@ -673,7 +1132,16 @@
     "duration_sec": 178,
     "src": "music/06_秋风落叶_萨克斯/01 - Autumn Leaves & Jazzhop.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/01 - Autumn Leaves & Jazzhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-052",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 72,
+    "musical_key": "F Maj",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 53,
@@ -686,7 +1154,16 @@
     "duration_sec": 178,
     "src": "music/06_秋风落叶_萨克斯/02 - Autumn Sunset Lofi.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/02 - Autumn Sunset Lofi.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-053",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 74,
+    "musical_key": "C Min",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 54,
@@ -699,7 +1176,16 @@
     "duration_sec": 179,
     "src": "music/06_秋风落叶_萨克斯/03 - Chilly Autumn Breeze.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/03 - Chilly Autumn Breeze.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-054",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 73,
+    "musical_key": "G Min",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 55,
@@ -712,7 +1198,16 @@
     "duration_sec": 178,
     "src": "music/06_秋风落叶_萨克斯/04 - Autumn Chill.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/04 - Autumn Chill.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-055",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 76,
+    "musical_key": "Bb Maj",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 56,
@@ -725,7 +1220,16 @@
     "duration_sec": 179,
     "src": "music/06_秋风落叶_萨克斯/05 - October Rain.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/05 - October Rain.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-056",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 72,
+    "musical_key": "D Min",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 57,
@@ -738,7 +1242,16 @@
     "duration_sec": 172,
     "src": "music/06_秋风落叶_萨克斯/06 - October Drift.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/06 - October Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-057",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 74,
+    "musical_key": "Eb Maj",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 58,
@@ -751,7 +1264,16 @@
     "duration_sec": 179,
     "src": "music/06_秋风落叶_萨克斯/07 - Warm Autumnal Chillhop.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/07 - Warm Autumnal Chillhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-058",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 75,
+    "musical_key": "Ab Maj",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 59,
@@ -764,7 +1286,16 @@
     "duration_sec": 178,
     "src": "music/06_秋风落叶_萨克斯/08 - Quiet Park Atmosphere.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/08 - Quiet Park Atmosphere.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-059",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 72,
+    "musical_key": "A Min",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 60,
@@ -777,7 +1308,16 @@
     "duration_sec": 179,
     "src": "music/06_秋风落叶_萨克斯/09 - Autumn Floating.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/09 - Autumn Floating.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-060",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 74,
+    "musical_key": "E Min",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 61,
@@ -790,7 +1330,16 @@
     "duration_sec": 173,
     "src": "music/06_秋风落叶_萨克斯/10 - Cozy Seasonal Harmony.m4a",
     "download_url": "music/06_秋风落叶_萨克斯/10 - Cozy Seasonal Harmony.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-061",
+    "master_genre": "JAZZ",
+    "master_genre_name": "Jazz-Derived",
+    "sub_genre": "JAZZ-SAX",
+    "sub_genre_name": "Smoky Sax & Cafe Jazz",
+    "bpm": 73,
+    "musical_key": "F Min",
+    "lead_instrument": "Breathy Alto Saxophone",
+    "daypart_slot": "Sunset Chill"
   },
   {
     "id": 62,
@@ -803,7 +1352,16 @@
     "duration_sec": 177,
     "src": "music/07_深度专注_脑波白噪/01 - Warm Stillness.m4a",
     "download_url": "music/07_深度专注_脑波白噪/01 - Warm Stillness.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-062",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 55,
+    "musical_key": "D Maj",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 63,
@@ -816,7 +1374,16 @@
     "duration_sec": 173,
     "src": "music/07_深度专注_脑波白噪/02 - Hypnotic Study Beat.m4a",
     "download_url": "music/07_深度专注_脑波白噪/02 - Hypnotic Study Beat.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-063",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 58,
+    "musical_key": "A Min",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 64,
@@ -829,7 +1396,16 @@
     "duration_sec": 179,
     "src": "music/07_深度专注_脑波白噪/03 - Weightless Focus.m4a",
     "download_url": "music/07_深度专注_脑波白噪/03 - Weightless Focus.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-064",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 56,
+    "musical_key": "E Min",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 65,
@@ -842,7 +1418,16 @@
     "duration_sec": 170,
     "src": "music/07_深度专注_脑波白噪/04 - Calm Waves Study.m4a",
     "download_url": "music/07_深度专注_脑波白噪/04 - Calm Waves Study.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-065",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 60,
+    "musical_key": "G Maj",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 66,
@@ -855,7 +1440,16 @@
     "duration_sec": 176,
     "src": "music/07_深度专注_脑波白噪/05 - Soft Horizon.m4a",
     "download_url": "music/07_深度专注_脑波白噪/05 - Soft Horizon.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-066",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 54,
+    "musical_key": "B Min",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 67,
@@ -868,7 +1462,16 @@
     "duration_sec": 170,
     "src": "music/07_深度专注_脑波白噪/06 - Peaceful Zen Study.m4a",
     "download_url": "music/07_深度专注_脑波白噪/06 - Peaceful Zen Study.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-067",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 58,
+    "musical_key": "F# Min",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 68,
@@ -881,7 +1484,16 @@
     "duration_sec": 179,
     "src": "music/07_深度专注_脑波白噪/07 - Steady Flow.m4a",
     "download_url": "music/07_深度专注_脑波白噪/07 - Steady Flow.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-068",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 56,
+    "musical_key": "C Maj",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 69,
@@ -894,7 +1506,16 @@
     "duration_sec": 172,
     "src": "music/07_深度专注_脑波白噪/08 - Zen Garden Ambient.m4a",
     "download_url": "music/07_深度专注_脑波白噪/08 - Zen Garden Ambient.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-069",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 55,
+    "musical_key": "Eb Maj",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 70,
@@ -907,7 +1528,16 @@
     "duration_sec": 176,
     "src": "music/07_深度专注_脑波白噪/09 - Quiet Drift.m4a",
     "download_url": "music/07_深度专注_脑波白噪/09 - Quiet Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-070",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 59,
+    "musical_key": "Ab Maj",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 71,
@@ -920,7 +1550,16 @@
     "duration_sec": 172,
     "src": "music/07_深度专注_脑波白噪/10 - Velvet Focus.m4a",
     "download_url": "music/07_深度专注_脑波白噪/10 - Velvet Focus.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-071",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-DRONE",
+    "sub_genre_name": "Deep Space Ambient Drone",
+    "bpm": 57,
+    "musical_key": "F Min",
+    "lead_instrument": "Ambient Shimmer Pads",
+    "daypart_slot": "Deep Focus & Brainwaves"
   },
   {
     "id": 72,
@@ -933,7 +1572,16 @@
     "duration_sec": 176,
     "src": "music/08_冬夜壁炉_温暖慢弹/01 - Winter Night Comfort.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/01 - Winter Night Comfort.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-072",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 66,
+    "musical_key": "E Min",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 73,
@@ -946,7 +1594,16 @@
     "duration_sec": 178,
     "src": "music/08_冬夜壁炉_温暖慢弹/02 - Winter Hearth.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/02 - Winter Hearth.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-073",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 68,
+    "musical_key": "G Maj",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 74,
@@ -959,7 +1616,16 @@
     "duration_sec": 178,
     "src": "music/08_冬夜壁炉_温暖慢弹/03 - Hearthside Melody.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/03 - Hearthside Melody.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-074",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 67,
+    "musical_key": "D Maj",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 75,
@@ -972,7 +1638,16 @@
     "duration_sec": 174,
     "src": "music/08_冬夜壁炉_温暖慢弹/04 - Winter Echoes.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/04 - Winter Echoes.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-075",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 70,
+    "musical_key": "A Min",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 76,
@@ -985,7 +1660,16 @@
     "duration_sec": 174,
     "src": "music/08_冬夜壁炉_温暖慢弹/05 - Sweet Acoustic Chillhop.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/05 - Sweet Acoustic Chillhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-076",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 66,
+    "musical_key": "B Min",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 77,
@@ -998,7 +1682,16 @@
     "duration_sec": 176,
     "src": "music/08_冬夜壁炉_温暖慢弹/06 - Flickering Candle Lofi.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/06 - Flickering Candle Lofi.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-077",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 68,
+    "musical_key": "C Maj",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 78,
@@ -1011,7 +1704,16 @@
     "duration_sec": 176,
     "src": "music/08_冬夜壁炉_温暖慢弹/07 - Fireside Haven.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/07 - Fireside Haven.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-078",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 69,
+    "musical_key": "F# Min",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 79,
@@ -1024,7 +1726,16 @@
     "duration_sec": 167,
     "src": "music/08_冬夜壁炉_温暖慢弹/08 - Quiet Fireplace Drift.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/08 - Quiet Fireplace Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-079",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 66,
+    "musical_key": "D Min",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 80,
@@ -1037,7 +1748,16 @@
     "duration_sec": 174,
     "src": "music/08_冬夜壁炉_温暖慢弹/09 - Homey Atmosphere.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/09 - Homey Atmosphere.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-080",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 68,
+    "musical_key": "F Maj",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 81,
@@ -1050,7 +1770,16 @@
     "duration_sec": 169,
     "src": "music/08_冬夜壁炉_温暖慢弹/10 - Warm Embers.m4a",
     "download_url": "music/08_冬夜壁炉_温暖慢弹/10 - Warm Embers.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-081",
+    "master_genre": "ACOU",
+    "master_genre_name": "Acoustic & Indie",
+    "sub_genre": "ACOU-HEARTH",
+    "sub_genre_name": "Cozy Hearthside Guitar",
+    "bpm": 67,
+    "musical_key": "A Maj",
+    "lead_instrument": "Warm Guitar & Fireplace",
+    "daypart_slot": "Evening Fireplace"
   },
   {
     "id": 82,
@@ -1063,7 +1792,16 @@
     "duration_sec": 175,
     "src": "music/09_夜猫微醺_都市霓虹/01 - Night Skyline Chillhop.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/01 - Night Skyline Chillhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-082",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 86,
+    "musical_key": "A Maj",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 83,
@@ -1076,7 +1814,16 @@
     "duration_sec": 173,
     "src": "music/09_夜猫微醺_都市霓虹/02 - Midnight Drive.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/02 - Midnight Drive.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-083",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 88,
+    "musical_key": "D Maj",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 84,
@@ -1089,7 +1836,16 @@
     "duration_sec": 178,
     "src": "music/09_夜猫微醺_都市霓虹/03 - Rooftop Night View.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/03 - Rooftop Night View.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-084",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 90,
+    "musical_key": "E Maj",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 85,
@@ -1102,7 +1858,16 @@
     "duration_sec": 179,
     "src": "music/09_夜猫微醺_都市霓虹/04 - Platform Drift.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/04 - Platform Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-085",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 87,
+    "musical_key": "B Min",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 86,
@@ -1115,7 +1880,16 @@
     "duration_sec": 181,
     "src": "music/09_夜猫微醺_都市霓虹/05 - Cyber City Rain.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/05 - Cyber City Rain.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-086",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 89,
+    "musical_key": "F# Min",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 87,
@@ -1128,7 +1902,16 @@
     "duration_sec": 178,
     "src": "music/09_夜猫微醺_都市霓虹/06 - Late Night Snack Run.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/06 - Late Night Snack Run.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-087",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 86,
+    "musical_key": "G Maj",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 88,
@@ -1141,7 +1924,16 @@
     "duration_sec": 179,
     "src": "music/09_夜猫微醺_都市霓虹/07 - Balcony Drift.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/07 - Balcony Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-088",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 88,
+    "musical_key": "C# Min",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 89,
@@ -1154,7 +1946,16 @@
     "duration_sec": 170,
     "src": "music/09_夜猫微醺_都市霓虹/08 - Window Seat Metro.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/08 - Window Seat Metro.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-089",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 90,
+    "musical_key": "D Min",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 90,
@@ -1167,7 +1968,16 @@
     "duration_sec": 172,
     "src": "music/09_夜猫微醺_都市霓虹/09 - Quiet Apartment at 2am.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/09 - Quiet Apartment at 2am.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-090",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 87,
+    "musical_key": "A Min",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 91,
@@ -1180,7 +1990,16 @@
     "duration_sec": 180,
     "src": "music/09_夜猫微醺_都市霓虹/10 - Nocturnal Chillhop.m4a",
     "download_url": "music/09_夜猫微醺_都市霓虹/10 - Nocturnal Chillhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-091",
+    "master_genre": "SYNT",
+    "master_genre_name": "Retro Synth & Ambient",
+    "sub_genre": "SYNT-CITY",
+    "sub_genre_name": "Neo-City Pop Lofi",
+    "bpm": 88,
+    "musical_key": "C Maj",
+    "lead_instrument": "Funky Guitar & Juno-106",
+    "daypart_slot": "Night Drive & Metro"
   },
   {
     "id": 92,
@@ -1193,7 +2012,16 @@
     "duration_sec": 152,
     "src": "music/10_星空慢速_舒眠放空/01 - Gentle Drift.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/01 - Gentle Drift.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-092",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 60,
+    "musical_key": "D Pentatonic",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 93,
@@ -1206,7 +2034,16 @@
     "duration_sec": 178,
     "src": "music/10_星空慢速_舒眠放空/02 - Stargazing Dreams.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/02 - Stargazing Dreams.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-093",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 62,
+    "musical_key": "A Pentatonic",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 94,
@@ -1219,7 +2056,16 @@
     "duration_sec": 178,
     "src": "music/10_星空慢速_舒眠放空/03 - Drifting to Sleep.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/03 - Drifting to Sleep.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-094",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 64,
+    "musical_key": "G Pentatonic",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 95,
@@ -1232,7 +2078,16 @@
     "duration_sec": 157,
     "src": "music/10_星空慢速_舒眠放空/04 - Surreal Ambient Chillhop.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/04 - Surreal Ambient Chillhop.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-095",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 61,
+    "musical_key": "E Pentatonic",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 96,
@@ -1245,7 +2100,16 @@
     "duration_sec": 173,
     "src": "music/10_星空慢速_舒眠放空/05 - Northern Lights Ambient.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/05 - Northern Lights Ambient.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-096",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 63,
+    "musical_key": "C Pentatonic",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 97,
@@ -1258,7 +2122,16 @@
     "duration_sec": 149,
     "src": "music/10_星空慢速_舒眠放空/06 - Midnight Whispers.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/06 - Midnight Whispers.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-097",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 60,
+    "musical_key": "F Pentatonic",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 98,
@@ -1271,7 +2144,16 @@
     "duration_sec": 159,
     "src": "music/10_星空慢速_舒眠放空/07 - Weightless Drifting.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/07 - Weightless Drifting.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-098",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 62,
+    "musical_key": "Bb Pentatonic",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 99,
@@ -1284,7 +2166,16 @@
     "duration_sec": 178,
     "src": "music/10_星空慢速_舒眠放空/08 - Sweet Goodnight.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/08 - Sweet Goodnight.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-099",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 65,
+    "musical_key": "D Min",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 100,
@@ -1297,7 +2188,16 @@
     "duration_sec": 166,
     "src": "music/10_星空慢速_舒眠放空/09 - Deep Slumber.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/09 - Deep Slumber.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-100",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 61,
+    "musical_key": "A Min",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   },
   {
     "id": 101,
@@ -1310,6 +2210,15 @@
     "duration_sec": 176,
     "src": "music/10_星空慢速_舒眠放空/10 - Century Dawn.m4a",
     "download_url": "music/10_星空慢速_舒眠放空/10 - Century Dawn.m4a",
-    "likes": 0
+    "likes": 0,
+    "isrc_code": "MCR-26-101",
+    "master_genre": "WORL",
+    "master_genre_name": "World & Fusion",
+    "sub_genre": "WORL-ZEN",
+    "sub_genre_name": "Oriental Zen & Stargazing",
+    "bpm": 63,
+    "musical_key": "E Min",
+    "lead_instrument": "Koto, Flute & Stargaze",
+    "daypart_slot": "Sleep & Stargazing"
   }
 ]

@@ -53,6 +53,14 @@ window.I18N_DATA = {
     footerCopyright: "© 2026 Midnight Coffee Radio • Powered by Google AI Pro & Lyria 3.5 • Broadcast from Seoul KT Hub",
     footerLive: "YouTube Live Stream",
     footerTop: "Back to Top ☕",
+    genres: {
+      "all": "ALL (101)",
+      "JAZZ": "☕ JAZZ (20)",
+      "BEAT": "🎧 BEAT (10)",
+      "ACOU": "🌧️ ACOUSTIC (31)",
+      "SYNT": "🏙️ SYNTH (20)",
+      "WORL": "🌸 WORLD (20)"
+    },
     categories: {
       "all": "ALL (101)",
       "01": "01. Rain Piano",
@@ -116,6 +124,14 @@ window.I18N_DATA = {
     footerCopyright: "© 2026 Midnight Coffee Radio • 基于 Google AI Pro 与 Lyria 3.5 驱动 • 韩国首尔 KT 节点推流",
     footerLive: "YouTube 24小时直播间",
     footerTop: "返回顶部 ☕",
+    genres: {
+      "all": "全部 (101)",
+      "JAZZ": "☕ 爵士派系 (20)",
+      "BEAT": "🎧 黄金节拍 (10)",
+      "ACOU": "🌧️ 温暖原声 (31)",
+      "SYNT": "🏙️ 合成夜景 (20)",
+      "WORL": "🌸 东方世界 (20)"
+    },
     categories: {
       "all": "全部 (101)",
       "01": "01. 雨夜电钢",
@@ -179,6 +195,14 @@ window.I18N_DATA = {
     footerCopyright: "© 2026 Midnight Coffee Radio • Google AI Pro & Lyria 3.5 搭載 • ソウルKTハブより世界配信",
     footerLive: "YouTube 24時間ライブ配信",
     footerTop: "トップへ戻る ☕",
+    genres: {
+      "all": "すべて (101)",
+      "JAZZ": "☕ ジャズ (20)",
+      "BEAT": "🎧 ビート (10)",
+      "ACOU": "🌧️ アコースティック (31)",
+      "SYNT": "🏙️ シンセ (20)",
+      "WORL": "🌸 ワールド (20)"
+    },
     categories: {
       "all": "すべて (101)",
       "01": "01. 雨のピアノ",
@@ -242,6 +266,14 @@ window.I18N_DATA = {
     footerCopyright: "© 2026 Midnight Coffee Radio • Google AI Pro & Lyria 3.5 기반 • 서울 KT 허브에서 전세계 송출",
     footerLive: "YouTube 24시간 라이브",
     footerTop: "맨 위로 ☕",
+    genres: {
+      "all": "전체 (101)",
+      "JAZZ": "☕ 재즈 (20)",
+      "BEAT": "🎧 비트 (10)",
+      "ACOU": "🌧️ 어쿠스틱 (31)",
+      "SYNT": "🏙️ 신스 (20)",
+      "WORL": "🌸 월드 (20)"
+    },
     categories: {
       "all": "전체 (101)",
       "01": "01. 빗소리 피아노",

@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const volumeSlider = document.getElementById('volumeSlider');
   
   const playerCategoryBadge = document.getElementById('playerCategoryBadge');
+  const playerBpmBadge = document.getElementById('playerBpmBadge');
+  const playerKeyBadge = document.getElementById('playerKeyBadge');
+  const playerSlotBadge = document.getElementById('playerSlotBadge');
   const playerTrackTitle = document.getElementById('playerTrackTitle');
   const currentLikeBtn = document.getElementById('currentLikeBtn');
   const currentLikeCount = document.getElementById('currentLikeCount');
@@ -38,12 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const spoolRight = document.getElementById('spoolRight');
   const playLed = document.getElementById('playLed');
 
-  // 2. 状态与音频引擎核心引用
+  // 2. 状态与音频引擎核心引用 (4级标准音乐分类体系驱动)
   let allTracks = [];
   let filteredTracks = [];
   let currentIndex = -1;
   let isShuffle = false;
-  let currentCategory = 'all';
+  let currentGenre = 'all';
 
   // Web Audio 声学分析引擎引用 (提升至顶部，杜绝 TDZ 变量未初始化引用错误)
   let audioCtx = null;
@@ -472,21 +475,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const elFooterTopLink = document.getElementById('footerTopLink');
     if (elFooterTopLink && dict.footerTop) elFooterTopLink.textContent = dict.footerTop;
 
-    // 3. 刷新分类标签按钮文本
-    if (categoryTabs && dict.categories) {
+    // 3. 刷新工业标准母分类标签按钮文本
+    if (categoryTabs && dict.genres) {
       categoryTabs.querySelectorAll('.cat-tab-btn').forEach(btn => {
-        const cat = btn.getAttribute('data-cat');
-        if (dict.categories[cat]) {
-          btn.textContent = dict.categories[cat];
+        const g = btn.getAttribute('data-genre') || btn.getAttribute('data-cat');
+        if (g && dict.genres[g]) {
+          btn.textContent = dict.genres[g];
         }
       });
     }
 
-    // 4. 刷新当前播放曲目分类徽章
+    // 4. 刷新当前播放曲目分类徽章与声学参数
     if (currentIndex >= 0 && filteredTracks[currentIndex]) {
       const cur = filteredTracks[currentIndex];
-      const curCatName = (dict.categories && dict.categories[cur.category_code]) || cur.category_name;
-      playerCategoryBadge.textContent = `[${curCatName}]`;
+      playerCategoryBadge.textContent = `[${cur.sub_genre || cur.category_code}] ${cur.sub_genre_name || cur.category_name}`;
+      if (playerBpmBadge) playerBpmBadge.textContent = `${cur.bpm || 75} BPM`;
+      if (playerKeyBadge) playerKeyBadge.textContent = cur.musical_key || 'C Maj';
+      if (playerSlotBadge) playerSlotBadge.textContent = cur.daypart_slot || 'Midnight Focus';
     } else {
       playerTrackTitle.textContent = dict.selectTrack || 'Select a track to play...';
     }
@@ -526,13 +531,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // 5. 筛选与曲目列表渲染
+  // 5. 标准流派筛选与曲目列表渲染
   function applyFilters() {
     const q = (searchInput.value || '').trim().toLowerCase();
     filteredTracks = allTracks.filter(t => {
-      const matchCat = currentCategory === 'all' || t.category_code === currentCategory;
-      const matchQuery = !q || t.title.toLowerCase().includes(q) || t.category_name.toLowerCase().includes(q);
-      return matchCat && matchQuery;
+      const matchGenre = currentGenre === 'all' || t.master_genre === currentGenre || t.category_code === currentGenre || t.sub_genre === currentGenre;
+      const matchQuery = !q ||
+        t.title.toLowerCase().includes(q) ||
+        (t.sub_genre && t.sub_genre.toLowerCase().includes(q)) ||
+        (t.sub_genre_name && t.sub_genre_name.toLowerCase().includes(q)) ||
+        (t.lead_instrument && t.lead_instrument.toLowerCase().includes(q)) ||
+        (t.musical_key && t.musical_key.toLowerCase().includes(q)) ||
+        (t.category_name && t.category_name.toLowerCase().includes(q));
+      return matchGenre && matchQuery;
     });
     renderTracksList();
   }
@@ -547,14 +558,19 @@ document.addEventListener('DOMContentLoaded', () => {
     tracksListContainer.innerHTML = filteredTracks.map((t, idx) => {
       const isCurrent = currentIndex >= 0 && filteredTracks[currentIndex] && filteredTracks[currentIndex].id === t.id;
       const isLiked = !!userLikes[t.id];
-      const catDisplay = (dict.categories && dict.categories[t.category_code]) || t.category_name;
+      const isrcTag = t.isrc_code ? t.isrc_code.replace('MCR-26-', '#') : String(t.id).padStart(3, '0');
       return `
         <div class="track-item ${isCurrent ? 'playing' : ''}" data-id="${t.id}">
           <div class="track-left">
-            <span class="track-num">${String(t.id).padStart(3, '0')}</span>
+            <span class="track-num">${isrcTag}</span>
             <div class="track-info-wrap">
               <div class="track-name-text">${t.title}</div>
-              <span class="track-cat-pill" data-cat="${t.category_code}">[${catDisplay}]</span>
+              <div class="track-meta-line">
+                <span class="track-cat-pill">[${t.sub_genre || t.category_code}]</span>
+                <span class="track-bpm-tag">${t.bpm || 75} BPM</span>
+                <span class="track-key-tag">${t.musical_key || ''}</span>
+                <span class="track-inst-tag">${t.lead_instrument || ''}</span>
+              </div>
             </div>
           </div>
           <div class="track-right">
@@ -783,9 +799,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     audio.src = track.src;
     playerTrackTitle.textContent = track.title;
-    const dict = getI18nDict();
-    const curCatName = (dict.categories && dict.categories[track.category_code]) || track.category_name;
-    playerCategoryBadge.textContent = `[${curCatName}]`;
+    playerCategoryBadge.textContent = `[${track.sub_genre || track.category_code}] ${track.sub_genre_name || track.category_name}`;
+    if (playerBpmBadge) playerBpmBadge.textContent = `${track.bpm || 75} BPM`;
+    if (playerKeyBadge) playerKeyBadge.textContent = track.musical_key || 'C Maj';
+    if (playerSlotBadge) playerSlotBadge.textContent = track.daypart_slot || 'Midnight Focus';
     currentLikeCount.textContent = track.likes || 0;
     currentLikeBtn.style.color = userLikes[track.id] ? '#ff79c6' : '';
     totalTimeLabel.textContent = track.duration;
@@ -935,14 +952,15 @@ document.addEventListener('DOMContentLoaded', () => {
   categoryTabs.addEventListener('click', (e) => {
     const btn = e.target.closest('.cat-tab-btn');
     if (!btn) return;
-    currentCategory = btn.getAttribute('data-cat');
+    currentGenre = btn.getAttribute('data-genre') || btn.getAttribute('data-cat') || 'all';
     updateCategoryTabsUI();
     applyFilters();
   });
 
   function updateCategoryTabsUI() {
     categoryTabs.querySelectorAll('.cat-tab-btn').forEach(b => {
-      b.classList.toggle('active', b.getAttribute('data-cat') === currentCategory);
+      const g = b.getAttribute('data-genre') || b.getAttribute('data-cat');
+      b.classList.toggle('active', g === currentGenre);
     });
   }
 

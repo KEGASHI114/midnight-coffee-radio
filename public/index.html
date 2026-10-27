@@ -49,7 +49,12 @@
     <section class="player-section pixel-box">
       <div class="player-top">
         <div class="now-playing-info">
-          <span class="badge" id="playerCategoryBadge">[01 Rainy Window]</span>
+          <div class="now-playing-badges">
+            <span class="badge" id="playerCategoryBadge">[ACOU-FELT] Felt Piano</span>
+            <span class="badge badge-bpm" id="playerBpmBadge">68 BPM</span>
+            <span class="badge badge-key" id="playerKeyBadge">Eb Maj</span>
+            <span class="badge badge-slot" id="playerSlotBadge">🌙 Midnight Focus</span>
+          </div>
           <h2 class="current-track-title" id="playerTrackTitle">Select a track to play...</h2>
           <span class="current-track-artist" id="playerArtist">Midnight Coffee Radio • Google Lyria 3.5</span>
         </div>
@@ -127,19 +132,14 @@
           </div>
         </div>
 
-        <!-- 10 大分类筛选标签页 -->
+        <!-- 5 大工业标准母流派筛选标签页 -->
         <div class="category-tabs" id="categoryTabs">
-          <button class="cat-tab-btn active" data-cat="all">ALL (101)</button>
-          <button class="cat-tab-btn" data-cat="01">01. Rain Piano</button>
-          <button class="cat-tab-btn" data-cat="02">02. Tokyo Code</button>
-          <button class="cat-tab-btn" data-cat="03">03. Coffee Jazz</button>
-          <button class="cat-tab-btn" data-cat="04">04. Vintage Tape</button>
-          <button class="cat-tab-btn" data-cat="05">05. Sunday Guitar</button>
-          <button class="cat-tab-btn" data-cat="06">06. Autumn Sax</button>
-          <button class="cat-tab-btn" data-cat="07">07. Deep Focus</button>
-          <button class="cat-tab-btn" data-cat="08">08. Cozy Hearth</button>
-          <button class="cat-tab-btn" data-cat="09">09. Night Neon</button>
-          <button class="cat-tab-btn" data-cat="10">10. Starry Sleep</button>
+          <button class="cat-tab-btn active" data-genre="all">ALL (101)</button>
+          <button class="cat-tab-btn" data-genre="JAZZ">☕ JAZZ (20)</button>
+          <button class="cat-tab-btn" data-genre="BEAT">🎧 BEAT (10)</button>
+          <button class="cat-tab-btn" data-genre="ACOU">🌧️ ACOUSTIC (31)</button>
+          <button class="cat-tab-btn" data-genre="SYNT">🏙️ SYNTH (20)</button>
+          <button class="cat-tab-btn" data-genre="WORL">🌸 WORLD (20)</button>
         </div>
 
         <!-- 歌曲列表 -->

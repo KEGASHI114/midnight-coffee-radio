@@ -402,14 +402,39 @@ body {
   to { transform: rotate(360deg); }
 }
 
+.now-playing-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
 .badge {
   display: inline-block;
-  background: #13101c;
-  color: var(--accent-cyan);
-  border: 1px solid var(--accent-cyan);
-  font-size: 11px;
-  padding: 2px 8px;
-  margin-bottom: 6px;
+  background: var(--accent-cyan);
+  color: #120e1a;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 3px 6px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  box-shadow: 1px 1px 0px #000;
+}
+
+.badge-bpm {
+  background: #ff79c6;
+  color: #120e1a;
+}
+
+.badge-key {
+  background: #bd93f9;
+  color: #120e1a;
+}
+
+.badge-slot {
+  background: #50fa7b;
+  color: #120e1a;
 }
 
 .current-track-title {
@@ -768,9 +793,46 @@ body {
   text-overflow: ellipsis;
 }
 
+.track-meta-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 10px;
+}
+
 .track-cat-pill {
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 10px;
+  color: var(--accent-cyan);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  background: #141120;
+  padding: 1px 4px;
+  border: 1px solid #2f2546;
+  border-radius: 2px;
+}
+
+.track-bpm-tag {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  background: #281e3a;
+  color: var(--accent-amber);
+  padding: 1px 4px;
+  border: 1px solid #3c2e55;
+  border-radius: 2px;
+}
+
+.track-key-tag {
+  font-size: 9px;
+  color: #bd93f9;
+}
+
+.track-inst-tag {
+  font-size: 10px;
+  color: #9287a3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .track-right {
