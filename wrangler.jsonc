@@ -1,8 +1,17 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "midnight-coffee-radio",
+  "main": "src/worker.js",
   "compatibility_date": "2026-10-27",
   "assets": {
-    "directory": "./public"
-  }
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mcr-db",
+      "database_id": "907837ac-fe6e-4180-9265-099094794644"
+    }
+  ]
 }

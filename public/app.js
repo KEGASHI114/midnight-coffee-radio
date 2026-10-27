@@ -45,16 +45,28 @@ document.addEventListener('DOMContentLoaded', () => {
   let isShuffle = false;
   let currentCategory = 'all';
 
-  // 真实点赞数据中心 (从 localStorage 读取真实的投票账本)
+  // 真实点赞数据中心 (本地只保留“我点赞过的曲目”，全网总票数通过 Cloudflare D1 云数据库同步)
   let userLikes = JSON.parse(localStorage.getItem('mcr_user_likes') || '{}');
-  let realVotesBook = JSON.parse(localStorage.getItem('mcr_real_votes') || '{}');
+  // 彻底清除旧版本遗留在客户端的伪单机账本
+  if (localStorage.getItem('mcr_real_votes')) {
+    localStorage.removeItem('mcr_real_votes');
+  }
 
-  // 3. 强制真实下载函数 (基于 Blob 拦截，彻底禁止跳转到浏览器黑屏原生播放器)
-  async function forceDownload(url, filename, triggerBtn = null) {
+  // 3. 强制真实下载函数 (基于 Blob 拦截，彻底禁止跳转到浏览器黑屏原生播放器，并上报下载统计)
+  async function forceDownload(url, filename, triggerBtn = null, trackId = null) {
     const originalText = triggerBtn ? triggerBtn.textContent : '';
     if (triggerBtn) {
       triggerBtn.textContent = '⏳ ...';
       triggerBtn.style.pointerEvents = 'none';
+    }
+
+    // 异步上报下载统计到 Cloudflare D1
+    if (trackId) {
+      fetch('/api/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trackId })
+      }).catch(() => {});
     }
 
     try {
@@ -94,18 +106,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 4. 数据初始化
+  // 4. 数据初始化与 Cloudflare D1 云端数据库实时对账
+  async function loadCloudStats() {
+    try {
+      const res = await fetch('/api/stats');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.success && data.stats) {
+          allTracks.forEach(t => {
+            if (data.stats[t.id]) {
+              t.likes = data.stats[t.id].likes || 0;
+              t.downloads = data.stats[t.id].downloads || 0;
+            }
+          });
+          applyFilters();
+          renderHallOfFame();
+          if (currentIndex >= 0 && filteredTracks[currentIndex]) {
+            currentLikeCount.textContent = filteredTracks[currentIndex].likes || 0;
+          }
+        }
+      }
+    } catch (e) {
+      console.log('[Cloud D1] 本地/离线运行模式，使用基线数据');
+    }
+  }
+
   function initTracks(data) {
     allTracks = data;
-    // 载入真实账本中的票数
     allTracks.forEach(t => {
-      t.likes = realVotesBook[t.id] || 0;
+      t.likes = t.likes || 0;
     });
     applyFilters();
     renderHallOfFame();
     if (allTracks.length > 0) {
       loadTrack(0, false);
     }
+    // 异步拉取全网 D1 真实云端总账本
+    loadCloudStats();
   }
 
   if (window.TRACKS_DATA && Array.isArray(window.TRACKS_DATA)) {
@@ -181,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           const audioUrl = dlBtn.getAttribute('data-url');
           const fileName = dlBtn.getAttribute('data-name');
-          forceDownload(audioUrl, fileName, dlBtn);
+          forceDownload(audioUrl, fileName, dlBtn, id);
         });
       }
 
@@ -270,33 +307,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 7. 真实点赞数据增减与本地持久化
+  // 7. 真实点赞数据增减 (前端毫秒级心跳反馈 + Cloudflare D1 云端数据库异步对账)
   function toggleLike(id, event = null) {
     const track = allTracks.find(t => t.id === id);
     if (!track) return;
 
-    if (userLikes[id]) {
-      delete userLikes[id];
-      track.likes = Math.max(0, (track.likes || 1) - 1);
-    } else {
+    const isNowLiked = !userLikes[id];
+    if (isNowLiked) {
       userLikes[id] = true;
       track.likes = (track.likes || 0) + 1;
       if (event && event.clientX) {
         spawnHeartBurst(event.clientX, event.clientY);
       }
+    } else {
+      delete userLikes[id];
+      track.likes = Math.max(0, (track.likes || 1) - 1);
     }
 
-    realVotesBook[id] = track.likes;
+    // 仅保存这台设备“我点过哪些歌”，不再存储单机假票数
     localStorage.setItem('mcr_user_likes', JSON.stringify(userLikes));
-    localStorage.setItem('mcr_real_votes', JSON.stringify(realVotesBook));
 
     if (currentIndex >= 0 && filteredTracks[currentIndex] && filteredTracks[currentIndex].id === id) {
       currentLikeCount.textContent = track.likes;
-      currentLikeBtn.style.color = userLikes[id] ? '#ff79c6' : '';
+      currentLikeBtn.style.color = isNowLiked ? '#ff79c6' : '';
     }
 
     applyFilters();
     renderHallOfFame();
+
+    // 异步同步到 Cloudflare D1 边缘数据库
+    fetch('/api/like', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ trackId: id, action: isNowLiked ? 'like' : 'unlike' })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.success && typeof data.likes === 'number') {
+          track.likes = data.likes;
+          if (currentIndex >= 0 && filteredTracks[currentIndex] && filteredTracks[currentIndex].id === id) {
+            currentLikeCount.textContent = track.likes;
+          }
+          applyFilters();
+          renderHallOfFame();
+        }
+      })
+      .catch(err => console.log('[Cloud D1 Sync Error]', err));
   }
 
   // 8. 播放器核心
@@ -445,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     if (currentIndex >= 0 && filteredTracks[currentIndex]) {
       const cur = filteredTracks[currentIndex];
-      forceDownload(cur.download_url, `${cur.title}.m4a`, currentDownloadBtn);
+      forceDownload(cur.download_url, `${cur.title}.m4a`, currentDownloadBtn, cur.id);
     }
   });
 
@@ -501,14 +557,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let peakHeights = new Array(BAR_COUNT).fill(2);
   let peakSpeeds = new Array(BAR_COUNT).fill(0);
 
-  // 18 根像素柱的对数人耳频段映射 (跳过 0 索引直流杂波)
+  // 18 根像素柱的真实对数声学频段映射 (聚焦于 Lo-Fi 有声区间 300Hz ~ 13.5kHz)
   const binIndices = [
-    1, 2, 3, 4, 5, 7, 9, 11, 14, 17, 21, 26, 31, 37, 43, 49, 55, 61
+    1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 18, 21, 24, 27, 30, 33, 36, 38
   ];
 
-  // 声学等响曲线加权 (彻底解决前两个低音柱过高爆满、中高音不跳的问题)
+  // 声学等响与高频增益补偿 (全面激活最后 4 根踩镲与黑胶杂音柱，低音与高音完美平衡)
   const weightCurve = [
-    0.46, 0.50, 0.58, 0.68, 0.78, 0.90, 1.05, 1.20, 1.35, 1.45, 1.55, 1.68, 1.80, 1.92, 2.05, 2.15, 2.25, 2.35
+    0.46, 0.48, 0.52, 0.62, 0.75, 0.90, 1.05, 1.15, 1.25, 1.35, 1.50, 1.65, 1.85, 2.05, 2.30, 2.55, 2.80, 2.95
   ];
 
   let audioCtx = null;
