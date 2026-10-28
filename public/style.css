@@ -674,6 +674,51 @@ body {
   font-weight: bold;
 }
 
+/* 联动二级细分流派子菜单导航栏 */
+.subgenre-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  padding: 8px 10px;
+  background: #191425;
+  border: 1px dashed #3a2e52;
+  border-radius: 4px;
+  animation: fadeIn 0.15s ease;
+}
+
+.subgenre-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #130f1d;
+  color: #a69bb8;
+  border: 1px solid #2e2343;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.1s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.subgenre-pill:hover {
+  background: #2b203e;
+  color: var(--accent-gold);
+  border-color: var(--accent-amber);
+}
+
+.subgenre-pill.active {
+  background: var(--accent-cyan);
+  color: #120e1a;
+  font-weight: bold;
+  border-color: #000;
+  box-shadow: 1px 1px 0px #000;
+}
+
 /* 歌曲列表项 */
 .tracks-list {
   max-height: 600px;
@@ -1097,10 +1142,20 @@ body {
   border-top: 1px dashed var(--card-border);
 }
 
-.form-row-top {
+.form-row-avatar {
   display: flex;
-  gap: 6px;
   align-items: center;
+  gap: 8px;
+}
+
+.avatar-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--accent-amber);
+}
+
+.form-row-nick {
+  width: 100%;
 }
 
 .avatar-picker {
@@ -1133,21 +1188,27 @@ body {
 }
 
 .nick-input {
-  flex: 1;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   font-size: 11px;
-  padding: 6px 8px;
+  padding: 6px 10px;
   background: #171124;
   border: 2px solid #000;
   color: #fff;
-  height: 28px;
+  height: 30px;
+  display: block;
 }
 
 .form-row-middle {
   position: relative;
+  width: 100%;
 }
 
 .content-input {
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   resize: none;
   font-size: 11px;
   padding: 6px 8px 18px 8px;

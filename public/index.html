@@ -142,6 +142,9 @@
           <button class="cat-tab-btn" data-genre="WORL">🌸 WORLD (20)</button>
         </div>
 
+        <!-- 联动二级细分流派子菜单 (动态展示该母分类下属的 20 首专属子流派) -->
+        <div class="subgenre-tabs" id="subgenreTabs" style="display: none;"></div>
+
         <!-- 歌曲列表 -->
         <div class="tracks-list" id="tracksList">
           <!-- 由 app.js 动态渲染 -->
@@ -178,8 +181,9 @@
 
           <!-- 留言发布表单 -->
           <form class="guestbook-form" id="guestbookForm">
-            <!-- 头像选择与昵称输入 -->
-            <div class="form-row-top">
+            <!-- 1. 头像选择行 -->
+            <div class="form-row-avatar">
+              <span class="avatar-label" id="avatarLabel">AVATAR:</span>
               <div class="avatar-picker" id="avatarPicker">
                 <button type="button" class="avatar-opt active" data-emoji="☕">☕</button>
                 <button type="button" class="avatar-opt" data-emoji="🐱">🐱</button>
@@ -188,10 +192,14 @@
                 <button type="button" class="avatar-opt" data-emoji="🌙">🌙</button>
                 <button type="button" class="avatar-opt" data-emoji="✨">✨</button>
               </div>
+            </div>
+
+            <!-- 2. 昵称全宽输入行 (彻底解决超界) -->
+            <div class="form-row-nick">
               <input type="text" id="guestNickname" class="pixel-input nick-input" placeholder="Your nickname..." maxlength="16" required>
             </div>
 
-            <!-- 留言内容与字数 -->
+            <!-- 3. 留言内容与字数 -->
             <div class="form-row-middle">
               <textarea id="guestContent" class="pixel-input content-input" placeholder="Leave a cozy thought... (max 100)" maxlength="100" rows="2" required></textarea>
               <span class="char-counter" id="charCounter">0/100</span>

@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fameListContainer = document.getElementById('fameList');
   const searchInput = document.getElementById('searchInput');
   const categoryTabs = document.getElementById('categoryTabs');
+  const subgenreTabs = document.getElementById('subgenreTabs');
   const bulkDownloadBtn = document.getElementById('bulkDownloadBtn');
 
   // 拟物化卡带机组件引用
@@ -47,6 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIndex = -1;
   let isShuffle = false;
   let currentGenre = 'all';
+  let currentSubgenre = 'all';
+
+  // 母流派与 15 个细分子流派映射表
+  const GENRE_SUBGENRES = {
+    'JAZZ': ['JAZZ-COOL', 'JAZZ-SOUL', 'JAZZ-BOSSA', 'JAZZ-SAX'],
+    'BEAT': ['BEAT-90S', 'BEAT-NUJA', 'BEAT-TRAP'],
+    'ACOU': ['ACOU-FELT', 'ACOU-GUIT', 'ACOU-BOX', 'ACOU-HEARTH'],
+    'SYNT': ['SYNT-CITY', 'SYNT-WAVE', 'SYNT-DRONE'],
+    'WORL': ['WORL-ZEN']
+  };
 
   // Web Audio 声学分析引擎引用 (提升至顶部，杜绝 TDZ 变量未初始化引用错误)
   let audioCtx = null;
@@ -500,6 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTracksList();
     renderHallOfFame();
     renderGuestbookMessages();
+    renderSubgenreTabs();
   }
 
   function initTracks(data) {
@@ -531,11 +543,54 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // 5. 标准流派筛选与曲目列表渲染
+  // 5. 联动细分流派子菜单渲染引擎
+  function renderSubgenreTabs() {
+    if (!subgenreTabs) return;
+    if (currentGenre === 'all' || !GENRE_SUBGENRES[currentGenre]) {
+      subgenreTabs.style.display = 'none';
+      subgenreTabs.innerHTML = '';
+      currentSubgenre = 'all';
+      return;
+    }
+
+    subgenreTabs.style.display = 'flex';
+    const dict = getI18nDict();
+    const subs = GENRE_SUBGENRES[currentGenre];
+    const totalInMaster = allTracks.filter(t => t.master_genre === currentGenre).length;
+
+    let html = `
+      <button type="button" class="subgenre-pill ${currentSubgenre === 'all' ? 'active' : ''}" data-sub="all">
+        ${dict.all_prefix || 'ALL'} (${totalInMaster})
+      </button>
+    `;
+
+    subs.forEach(sg => {
+      const label = (dict.subgenres && dict.subgenres[sg]) || sg;
+      html += `
+        <button type="button" class="subgenre-pill ${currentSubgenre === sg ? 'active' : ''}" data-sub="${sg}">
+          ${label}
+        </button>
+      `;
+    });
+
+    subgenreTabs.innerHTML = html;
+
+    subgenreTabs.querySelectorAll('.subgenre-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        currentSubgenre = pill.getAttribute('data-sub');
+        subgenreTabs.querySelectorAll('.subgenre-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        applyFilters();
+      });
+    });
+  }
+
+  // 5.1 标准流派筛选与曲目列表渲染
   function applyFilters() {
     const q = (searchInput.value || '').trim().toLowerCase();
     filteredTracks = allTracks.filter(t => {
-      const matchGenre = currentGenre === 'all' || t.master_genre === currentGenre || t.category_code === currentGenre || t.sub_genre === currentGenre;
+      const matchGenre = currentGenre === 'all' || t.master_genre === currentGenre;
+      const matchSubgenre = currentSubgenre === 'all' || t.sub_genre === currentSubgenre;
       const matchQuery = !q ||
         t.title.toLowerCase().includes(q) ||
         (t.sub_genre && t.sub_genre.toLowerCase().includes(q)) ||
@@ -543,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
         (t.lead_instrument && t.lead_instrument.toLowerCase().includes(q)) ||
         (t.musical_key && t.musical_key.toLowerCase().includes(q)) ||
         (t.category_name && t.category_name.toLowerCase().includes(q));
-      return matchGenre && matchQuery;
+      return matchGenre && matchSubgenre && matchQuery;
     });
     renderTracksList();
   }
@@ -952,8 +1007,10 @@ document.addEventListener('DOMContentLoaded', () => {
   categoryTabs.addEventListener('click', (e) => {
     const btn = e.target.closest('.cat-tab-btn');
     if (!btn) return;
-    currentGenre = btn.getAttribute('data-genre') || btn.getAttribute('data-cat') || 'all';
+    currentGenre = btn.getAttribute('data-genre') || 'all';
+    currentSubgenre = 'all';
     updateCategoryTabsUI();
+    renderSubgenreTabs();
     applyFilters();
   });
 
